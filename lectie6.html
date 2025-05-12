@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <title>Planificarea pensiei</title>
+  <link rel="stylesheet" href="../css/bani.css">
+</head>
+<body>
+
+  <h1>Planificarea pensiei</h1>  
+
+  <p>Este important să începi să economisești pentru pensie cât mai devreme. În această lecție vei învăța cum să planifici o pensie sigură...</p>
+
+  <div class="butoane-lectie">
+    <a href="bani.html" class="buton-intoarcere">🏠 Înapoi la lista lecțiilor</a>
+  </div>
+
+  <script>
+    const idLectie = "6";
+    window.onload = () => {
+      let lectiiCitite = JSON.parse(localStorage.getItem('lectiiCitite')) || [];
+      if (!lectiiCitite.includes(idLectie)) {
+        lectiiCitite.push(idLectie);
+        localStorage.setItem('lectiiCitite', JSON.stringify(lectiiCitite));
+      }
+    };
+  </script>
+
+</body>
+</html>
