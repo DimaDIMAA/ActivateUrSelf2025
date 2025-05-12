@@ -1,0 +1,200 @@
+/* Centrare pe mijlocul paginii */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+}
+
+/* Container general al quizului */
+#quiz-container {
+    max-width: 800px;
+    width: 100%;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+/* Stil pentru fiecare întrebare */
+.question {
+    margin-bottom: 25px;
+}
+
+.question p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.question label {
+    display: block;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+/* Buton trimitere */
+#submit-btn {
+    margin-top: 20px;
+    padding: 12px 24px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#submit-btn:hover {
+    background-color: #0056b3;
+}
+
+#submit-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Buton Resetare - design simplu, elegant, ușor de utilizat */
+#reset-btn {
+    margin-top: 20px;
+    padding: 12px 20px;
+    background-color: #f44336;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    width: auto;
+    text-align: center;
+    font-weight: bold;
+}
+
+#reset-btn:hover {
+    background-color: #e53935;
+    transform: translateY(-2px);
+}
+
+#reset-btn:active {
+    background-color: #c62828;
+    transform: translateY(2px);
+}
+
+#reset-btn:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(244, 67, 54, 0.7);
+}
+
+/* Rezultat și concluzie */
+#result {
+    margin-top: 25px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+#conclusion {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #e6ffe6;
+    border-left: 5px solid #28a745;
+    border-radius: 8px;
+    display: none;
+    text-align: center;
+}
+
+#conclusion h2 {
+    margin-top: 0;
+    color: #28a745;
+}
+
+/* Răspunsuri corecte și greșite */
+.correct {
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 3px 0;
+}
+
+.incorrect {
+    background-color: #dc3545;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 3px 0;
+}
+
+/* Stilizare buton "Înapoi la pagina principală" */
+.expert-button {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    color: #ffffff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 20px;
+}
+
+.expert-button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.expert-button:active {
+    background-color: #1e7e34;
+}
+
+.expert-button:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.6);
+}
+#quiz-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    padding: 10px 20px;
+    border-bottom: 2px solid #ddd;
+    z-index: 1000;
+  }
+  
+#quiz-title {
+    font-size: 1.8em;
+    color: #2c3e50;
+    margin: 0;
+}
+  
+#timer {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #e74c3c;
+    background-color: #fceae9;
+    border: 1px solid #e0b4b4;
+    padding: 6px 12px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+@keyframes corect {
+    0% { transform: scale(1); background-color: transparent; }
+    50% { transform: scale(1.1); background-color: #a0f0a0; }
+    100% { transform: scale(1); background-color: transparent; }
+  }
+  
+  .animatie-corecta {
+    animation: corect 3s ease;
+  }
