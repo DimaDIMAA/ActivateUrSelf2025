@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test Orientare Carieră</title>
+  <link href="./css/quiz_cariera.css" rel="stylesheet">
+</head>
+<body>
+
+  <div id="quiz-section">
+    <h2>Test de orientare în carieră</h2>
+    
+    <div id="question-text">Încărcăm întrebările...</div>
+
+    <div class="buttons">
+      <button id="btn-yes">Da</button>
+      <button id="btn-no">Nu</button>
+    </div>
+
+    <div id="progress-container">
+      <div id="progress-bar">
+        <div id="progress-bar-fill"></div>
+      </div>
+      <div id="progress-text">Întrebarea 0/140</div>
+    </div>
+  </div>
+
+  <div id="result-section" style="display:none;">
+    <h2>Rezultatele tale</h2>
+    <div id="result-list"></div>
+    <button id="retry-btn">Refă testul</button>
+    <p class="tip">💡 Concentrează-te pe primele 3-5 domenii care ți se potrivesc cel mai bine!</p>
+  </div>
+  <script src="./js/quiz_cariera.js" defer></script>
+</body>
+</html>
