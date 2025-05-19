@@ -111,7 +111,6 @@ const intrebari = [
   { text: "Îți place să investighezi și să faci cercetări științifice?", domenii: [{id:12, puncte:2}, {id:20, puncte:1}] },
   { text: "Ești interesat să protejezi mediul și natura?", domenii: [{id:13, puncte:2}, {id:27, puncte:1}] },
   { text: "Te preocupă ordinea publică și siguranța comunității?", domenii: [{id:14, puncte:2}, {id:18, puncte:1}] },
-
   { text: "Îți place să optimizezi procesele tehnologice și să contribui la protecția mediului?", domenii: [{id:26, puncte:2}, {id:17, puncte:1}] },
   { text: "Te pasionează ingineria industrială și metodele de producție eficiente?", domenii: [{id:27, puncte:2}, {id:7, puncte:1}] },
   { text: "Îți place să oferi servicii de înfrumusețare și să ajuți oamenii să se simtă bine?", domenii: [{id:22, puncte:2}, {id:25, puncte:1}] },
@@ -119,6 +118,11 @@ const intrebari = [
   { text: "Ești interesat(ă) de cercetare științifică și de dezvoltarea tehnologiilor verzi?", domenii: [{id:16, puncte:2}, {id:26, puncte:1}] },
   { text: "Te atrage domeniul protecției și securității publice, precum și organizarea transporturilor?", domenii: [{id:20, puncte:2}, {id:21, puncte:1}] },
 
+  { text: "Îți place să analizezi comportamentul oamenilor și să înțelegi cum gândesc?", domenii: [{id:3, puncte:2}, {id:5, puncte:1}] }, // Psihologie, Sociologie
+  { text: "Te simți inspirat de modă și ai idei despre cum ai reinventa stiluri vechi într-un mod nou?", domenii: [{id:9, puncte:2}, {id:10, puncte:1}] }, // Arte vizuale, Design  { text: "Îți imaginezi cum ai putea organiza un eveniment caritabil de amploare pentru o cauză în care crezi?", domenii: [{id:5, puncte:2}, {id:6, puncte:1}] }, // Sociologie, Politică
+  { text: "Ești pasionat de sport și de comunicarea digitală pentru promovarea unui stil de viață sănătos?", domenii: [{id:13, puncte:1}, {id:24, puncte:1}] }, // Sport & Kinetoterapie, Comunicare digitală & Media
+  { text: "Te atrage să explorezi metode educaționale inovative folosind tehnologie IT și jurnalism pentru diseminare?", domenii: [{id:0, puncte:1}, {id:6, puncte:1}, {id:14, puncte:1}] }, // IT & Programare, Educație & Pedagogie, Jurnalism & Comunicare
+  
 ];
 
 // Variabile pentru starea quiz-ului
