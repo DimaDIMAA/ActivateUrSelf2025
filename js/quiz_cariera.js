@@ -1,13 +1,13 @@
 // Domenii carieră
 const domenii = [
-  "IT & Programare", "Medicină", "Psihologie", "Business & Management",
-  "Marketing & Vânzări", "Drept & Justiție", "Educație & Pedagogie", "Inginerie",
-  "Construcții & Urbanism", "Arte Vizuale", "Design & Modă", "Film & Teatru",
-  "Muzică", "Sport & Kinetoterapie", "Jurnalism & Comunicare", "Turism & Ospitalitate",
-  "Știință & Cercetare", "Mediu & Ecologie", "Politică & Administrație",
-  "Agricultură & Alimentație", "Armată & Securitate", "Transport & Logistică",
-  "Estetică & Îngrijire Personală", "Gastronomie & Bucătărie",
-  "Comunicare digitală & Media", "Servicii Sociale", "Energie & Resurse", "Industrie & Producție"
+  "IT & Programare", "Medicină", "Psihologie", "Business & Management",//0
+  "Marketing & Vânzări", "Drept & Justiție", "Educație & Pedagogie", "Inginerie",//4
+  "Construcții & Urbanism", "Arte Vizuale", "Design & Modă", "Film & Teatru",//8
+  "Muzică", "Sport & Kinetoterapie", "Jurnalism & Comunicare", "Turism & Ospitalitate",//12
+  "Știință & Cercetare", "Mediu & Ecologie", "Politică & Administrație",//16
+  "Agricultură & Alimentație", "Armată & Securitate", "Transport & Logistică",//19
+  "Estetică & Îngrijire Personală", "Gastronomie & Bucătărie",//22
+  "Comunicare digitală & Media", "Servicii Sociale", "Energie & Resurse", "Industrie & Producție"//24
 ];
 
 // Întrebări și domeniile cu punctajele acordate dacă se răspunde "Da"
@@ -98,7 +98,6 @@ const intrebari = [
   { text: "Îți place să creezi conținut digital și să dezvolți comunități online?", domenii: [{id:24, puncte:1}, {id:14, puncte:1}] }, // Comunicare digitală & Comunicare
   { text: "Ai interes în prepararea mâncărurilor tradiționale și inovative?", domenii: [{id:23, puncte:1}, {id:15, puncte:1}] }, // Gastronomie & Turism
   { text: "Îți place să oferi sfaturi pentru aspectul fizic și îngrijirea personală?", domenii: [{id:22, puncte:1}, {id:25, puncte:1}] }, // Estetică & Servicii Sociale
-
   { text: "Te implici în activități care ajută comunitatea sau persoanele în dificultate?", domenii: [{id:2, puncte:2}, {id:26, puncte:1}] },
   { text: "Ești pasionat de organizarea de evenimente și turism?", domenii: [{id:3, puncte:2}, {id:17, puncte:1}] },
   { text: "Îți place să scrii cod sau să dezvolți aplicații digitale?", domenii: [{id:4, puncte:2}, {id:16, puncte:1}] },
@@ -113,17 +112,53 @@ const intrebari = [
   { text: "Te preocupă ordinea publică și siguranța comunității?", domenii: [{id:14, puncte:2}, {id:18, puncte:1}] },
   { text: "Îți place să optimizezi procesele tehnologice și să contribui la protecția mediului?", domenii: [{id:26, puncte:2}, {id:17, puncte:1}] },
   { text: "Te pasionează ingineria industrială și metodele de producție eficiente?", domenii: [{id:27, puncte:2}, {id:7, puncte:1}] },
-  { text: "Îți place să oferi servicii de înfrumusețare și să ajuți oamenii să se simtă bine?", domenii: [{id:22, puncte:2}, {id:25, puncte:1}] },
   { text: "Îți place să creezi rețete noi și să lucrezi în domeniul ospitalității?", domenii: [{id:23, puncte:2}, {id:15, puncte:1}] },
   { text: "Ești interesat(ă) de cercetare științifică și de dezvoltarea tehnologiilor verzi?", domenii: [{id:16, puncte:2}, {id:26, puncte:1}] },
   { text: "Te atrage domeniul protecției și securității publice, precum și organizarea transporturilor?", domenii: [{id:20, puncte:2}, {id:21, puncte:1}] },
+  { text: "Ești interesat să ajuți oamenii să înțeleagă mai bine lumea și să îi sprijini emoțional?", domenii: [{id:2, puncte:1}, {id:6, puncte:1}] },
+  { text: "Îți place să organizezi evenimente și să comunici mesaje captivante?", domenii: [{id:14, puncte:1}, {id:24, puncte:1}] },
+  { text: "Îți place să creezi și să interpretezi muzică sau să participi la evenimente culturale?", domenii: [{id:12, puncte:1}, {id:11, puncte:1}] },
+  { text: "Îți place să proiectezi spații funcționale și să folosești tehnologie modernă?", domenii: [{id:8, puncte:1}, {id:7, puncte:1}] },
+  { text: "Te atrage ideea de a lucra în domeniul sănătății și de a ajuta fizic pacienții?", domenii: [{id:1, puncte:1}, {id:13, puncte:1}] },
+  { text: "Îți place să folosești creativitatea în design vestimentar și artă vizuală?", domenii: [{id:10, puncte:1}, {id:9, puncte:1}] },//asdasd
+  { text: "Îți place să scrii cod și să creezi aplicații software?", domenii: [{id: 0, puncte: 2}] },
+  { text: "Îți place să rezolvi probleme tehnice și să găsești soluții inovatoare în domeniul tehnologiei?", domenii: [{id: 25, puncte: 1}] },
+  { text: "Îți place să combini o alimentație sănătoasă cu o rutină regulată de îngrijire a pielii?", domenii: [{id:22, puncte:1}, {id:5, puncte:1}] },
+  { text: "Te interesează atât tendințele de modă cât și cele de machiaj pentru a-ți exprima personalitatea?", domenii: [{id:22, puncte:1}, {id:3, puncte:1}] },
+  { text: "Practici sport regulat și acorzi atenție îngrijirii corpului pentru a te menține în formă?", domenii: [{id:22, puncte:1}, {id:9, puncte:1}] },
+  { text: "Ești interesat/ă atât de produse cosmetice naturale cât și de metode alternative de relaxare și îngrijire?", domenii: [{id:19, puncte:1}, {id:12, puncte:1}] },
+  { text: "Ești interesat(ă) de metodele sustenabile de cultivare a culturilor agricole?", domenii: [{id:19, puncte:2}] },
+  { text: "Te interesează atât sănătatea oamenilor, cât și modul în care bunurile esențiale ajung rapid la destinație?", domenii: [{id:1, puncte:1}, {id:21, puncte:1}] },
+  { text: "Ai răbdare să planifici și să gestionezi situații critice, fie în spitale, fie în transport?", domenii: [{id:1, puncte:1}, {id:21, puncte:1}] },
+  {
+  text: "Îți place să creezi strategii digitale și să dezvolți soluții tehnologice care să stimuleze vânzările și să comunice eficient cu publicul?",
+  domenii: [
+    {id: 24, puncte: 1},  // Comunicare digitală & Media
+    {id: 0, puncte: 1},  // IT & Programare
+    {id: 3, puncte: 1},  // Business & Management
+    {id: 4, puncte: 1}   // Marketing & Vânzări
+  ]
+},
+{
+  text: "Îți place să explorezi și să promovezi experiențe culturale sau turistice, respectând în același timp mediul și siguranța comunităților?",
+  domenii: [
+    {id: 11, puncte: 1},  // Film & Teatru
+    {id: 15, puncte: 1},  // Turism & Ospitalitate
+    {id: 17, puncte: 1},  // Mediu & Ecologie
+    {id: 20, puncte: 1}   // Armată & Securitate
+  ]
+},
+{
+  text: "Îți place să oferi servicii de îngrijire și să contribui la sănătatea și bunăstarea oamenilor, folosind în același timp resurse eficiente și tehnologii moderne?",
+  domenii: [
+    {id: 22, puncte: 1},   // Estetică & Îngrijire Personală
+    {id: 26, puncte: 1},  // Energie & Resurse
+    {id: 27, puncte: 1}   // Industrie & Producție
+  ]
+},
+{text: "Te pasionează să înțelegi gândurile și emoțiile oamenilor pentru a-i ajuta să-și depășească dificultățile?",domenii: [{id: 2, puncte: 1}] },
 
-  { text: "Îți place să analizezi comportamentul oamenilor și să înțelegi cum gândesc?", domenii: [{id:3, puncte:2}, {id:5, puncte:1}] }, // Psihologie, Sociologie
-  { text: "Te simți inspirat de modă și ai idei despre cum ai reinventa stiluri vechi într-un mod nou?", domenii: [{id:9, puncte:2}, {id:10, puncte:1}] }, // Arte vizuale, Design  { text: "Îți imaginezi cum ai putea organiza un eveniment caritabil de amploare pentru o cauză în care crezi?", domenii: [{id:5, puncte:2}, {id:6, puncte:1}] }, // Sociologie, Politică
-  { text: "Ești pasionat de sport și de comunicarea digitală pentru promovarea unui stil de viață sănătos?", domenii: [{id:13, puncte:1}, {id:24, puncte:1}] }, // Sport & Kinetoterapie, Comunicare digitală & Media
-  { text: "Te atrage să explorezi metode educaționale inovative folosind tehnologie IT și jurnalism pentru diseminare?", domenii: [{id:0, puncte:1}, {id:6, puncte:1}, {id:14, puncte:1}] }, // IT & Programare, Educație & Pedagogie, Jurnalism & Comunicare
-  
-];
+]
 
 // Variabile pentru starea quiz-ului
 let currentIndex = 0;
