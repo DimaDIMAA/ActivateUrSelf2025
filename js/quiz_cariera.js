@@ -55,7 +55,7 @@ const intrebari = [
   { text: "Ești pasionat(ă) de muzică și interpretare?", domenii: [{id:12, puncte:2}] },
   { text: "Practici sport regulat sau te interesează kinetoterapia?", domenii: [{id:13, puncte:2}] },
   { text: "Îți place să scrii articole sau să comunici știri?", domenii: [{id:14, puncte:2}] },
-  { text: "Îți place să organizezi evenimente turistice sau ospitalitatea?", domenii: [{id:15, puncte:2}] },
+  { text: "Îți place să organizezi evenimente turistice sau să lucrezi în domeniul ospitalității?", domenii: [{id:15, puncte:2}] },
   { text: "Ești curios(ă) să explorezi știința și cercetarea?", domenii: [{id:16, puncte:2}] },
   { text: "Te preocupă protejarea mediului înconjurător?", domenii: [{id:17, puncte:2}] },
   { text: "Ești interesat(ă) de politica locală și guvernare?", domenii: [{id:18, puncte:2}] },
@@ -78,7 +78,7 @@ const intrebari = [
   { text: "Ai pasiune pentru arte vizuale, design și modă?", domenii: [{id:9, puncte:1}, {id:10, puncte:2}] }, // Arte Vizuale, Design & Modă
   { text: "Îți place teatrul, filmul și comunicarea?", domenii: [{id:11, puncte:2}, {id:24, puncte:1}] }, // Film & Teatru, Comunicare digitală
   { text: "Ești pasionat de muzică, sport și kinetoterapie?", domenii: [{id:12, puncte:1}, {id:13, puncte:2}] }, // Muzică, Sport
-  { text: "Îți place să organizezi turismul și ospitalitatea?", domenii: [{id:15, puncte:2}, {id:23, puncte:1}] }, // Turism, Gastronomie
+  { text: "Ți-ar plăcea să organizezi excursii, sejururi sau activități turistice?", domenii: [{id:15, puncte:2}, {id:23, puncte:1}] }, // Turism, Gastronomie
   { text: "Ești interesat de știință, mediu și energie?", domenii: [{id:16, puncte:1}, {id:17, puncte:2}, {id:26, puncte:1}] }, // Știință, Mediu, Energie
   { text: "Te pasionează agricultura, industria și producția?", domenii: [{id:19, puncte:2}, {id:27, puncte:1}] }, // Agricultură, Industrie
   { text: "Îți place să lucrezi cu securitatea și protecția?", domenii: [{id:20, puncte:2}, {id:21, puncte:1}] }, // Armată & Securitate, Transport
@@ -159,81 +159,162 @@ const intrebari = [
 {text: "Te pasionează să înțelegi gândurile și emoțiile oamenilor pentru a-i ajuta să-și depășească dificultățile?",domenii: [{id: 2, puncte: 1}] },
 
 ]
+const perPagina = 5;
+let paginaCurenta = 0;
+const raspunsuri = [];
+const scoruri = Array(intrebari.length).fill(0);
 
-// Variabile pentru starea quiz-ului
-let currentIndex = 0;
-const scoruri = Array(domenii.length).fill(0);
-
-// Elemente DOM
-const questionText = document.getElementById("question-text");
-const btnYes = document.getElementById("btn-yes");
-const btnNo = document.getElementById("btn-no");
-const progressText = document.getElementById("progress-text");
+// Elemente din DOM
+const groupDiv = document.getElementById("question-group");
 const progressBarFill = document.getElementById("progress-bar-fill");
+const progressPercent = document.getElementById("progress-percent");
+const progressStep = document.getElementById("progress-step");
 const resultSection = document.getElementById("result-section");
-const quizSection = document.getElementById("quiz-section");
+const quizContainer = document.querySelector(".quiz-container");
 const resultList = document.getElementById("result-list");
 const retryBtn = document.getElementById("retry-btn");
 
-// Funcție pentru afișarea întrebării curente
-function afiseazaIntrebarea() {
-  if (currentIndex < intrebari.length) {
-    questionText.textContent = intrebari[currentIndex].text;
-    progressText.textContent = `Întrebarea ${currentIndex + 1}/${intrebari.length}`;
-    progressBarFill.style.width = `${((currentIndex) / intrebari.length) * 100}%`;
+function afiseazaPagina() {
+  groupDiv.innerHTML = "";
+
+  const start = paginaCurenta * perPagina;
+  const end = Math.min(start + perPagina, intrebari.length);
+  const procent = Math.round((start / intrebari.length) * 100);
+  const totalPagini = Math.ceil(intrebari.length / perPagina);
+
+  progressBarFill.style.width = `${procent}%`;
+  progressPercent.textContent = `${procent}%`;
+  progressStep.textContent = `Pas ${paginaCurenta + 1} din ${totalPagini}`;
+
+  for (let i = start; i < end; i++) {
+    const intrebare = intrebari[i];
+    const block = document.createElement("div");
+    block.className = "question-block";
+
+    const p = document.createElement("p");
+    p.textContent = intrebare.text;
+    block.appendChild(p);
+
+    const scale = document.createElement("div");
+    scale.className = "likert-scale";
+
+    [0.2, 0.4, 0.6, 0.8, 1.0].forEach(val => {
+      const opt = document.createElement("div");
+      opt.className = "likert-option";
+      opt.dataset.index = i;
+      opt.dataset.val = val;
+
+      const circle = document.createElement("div");
+      circle.className = "circle";
+      opt.appendChild(circle);
+
+      if (raspunsuri[i] === val) {
+        opt.classList.add("selected");
+      }
+
+      opt.addEventListener("click", () => {
+        raspunsuri[i] = val;
+        afiseazaPagina();
+
+        // Scroll către butonul Continuă
+        setTimeout(() => {
+          const btn = document.querySelector(".btn-next");
+          if (btn) btn.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 200);
+      });
+
+      scale.appendChild(opt);
+    });
+
+    block.appendChild(scale);
+    groupDiv.appendChild(block);
+  }
+
+  // ⚠️ Mesaj de avertizare
+  const warning = document.createElement("p");
+  warning.id = "warning-message";
+  warning.style.color = "#b00020";
+  warning.style.fontSize = "0.9rem";
+  warning.style.textAlign = "center";
+  warning.style.marginTop = "20px";
+  warning.style.display = "none";
+  warning.textContent = "Te rugăm să răspunzi la toate afirmațiile înainte de a continua.";
+  groupDiv.appendChild(warning);
+
+  // Buton Continuă
+  const btn = document.createElement("button");
+  btn.textContent = paginaCurenta === Math.floor(intrebari.length / perPagina)
+    ? "Vezi rezultatele"
+    : "Continuă";
+  btn.className = "btn-next";
+  btn.onclick = urmatoareaPagina;
+  groupDiv.appendChild(btn);
+}
+
+function urmatoareaPagina() {
+  const start = paginaCurenta * perPagina;
+  const end = Math.min(start + perPagina, intrebari.length);
+  let toateCompletate = true;
+
+  for (let i = start; i < end; i++) {
+    const bloc = groupDiv.querySelector(`.question-block:nth-child(${(i - start) + 1})`);
+    const raspuns = raspunsuri[i];
+
+    if (!raspuns) {
+      toateCompletate = false;
+      bloc.classList.add("error");
+    } else {
+      bloc.classList.remove("error");
+    }
+  }
+
+  const warning = document.getElementById("warning-message");
+
+  if (!toateCompletate) {
+    warning.style.display = "block";
+    return;
   } else {
+    warning.style.display = "none";
+  }
+
+  paginaCurenta++;
+  if (paginaCurenta * perPagina >= intrebari.length) {
     finalizeazaTestul();
+  } else {
+    afiseazaPagina();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 }
 
-// Funcție care se apelează când utilizatorul apasă „Da”
-function raspundeDa() {
-  const intrebarea = intrebari[currentIndex];
-  intrebarea.domenii.forEach(d => {
-    scoruri[d.id] += d.puncte;
-  });
-  currentIndex++;
-  afiseazaIntrebarea();
-}
-
-// Funcție care se apelează când utilizatorul apasă „Nu”
-function raspundeNu() {
-  currentIndex++;
-  afiseazaIntrebarea();
-}
-
-// Funcție pentru afișarea rezultatelor
 function finalizeazaTestul() {
-  quizSection.style.display = "none";
+  quizContainer.style.display = "none";
   resultSection.style.display = "block";
 
-  // Sortează domeniile după scor descrescător
-  const rezultateSortate = domenii.map((nume, idx) => {
-    return { nume, scor: scoruri[idx] };
-  }).sort((a, b) => b.scor - a.scor);
+  raspunsuri.forEach((val, i) => {
+    intrebari[i].domenii.forEach(d => {
+      scoruri[d.id] += d.puncte * val;
+    });
+  });
 
-  // Afișează toate domeniile în ordine descrescătoare după punctaj
+  const rezultate = domenii.map((nume, idx) => ({ nume, scor: scoruri[idx].toFixed(2) }))
+    .sort((a, b) => b.scor - a.scor);
+
   resultList.innerHTML = "";
-  rezultateSortate.forEach(r => {
+  rezultate.forEach(r => {
     const p = document.createElement("p");
     p.textContent = `${r.nume}: ${r.scor} puncte`;
     resultList.appendChild(p);
   });
 }
 
-// Funcție pentru resetarea testului
 function reseteazaTestul() {
-  currentIndex = 0;
+  paginaCurenta = 0;
   scoruri.fill(0);
+  raspunsuri.length = 0;
+  quizContainer.style.display = "block";
   resultSection.style.display = "none";
-  quizSection.style.display = "block";
-  afiseazaIntrebarea();
+  afiseazaPagina();
 }
 
-// Event listeners
-btnYes.addEventListener("click", raspundeDa);
-btnNo.addEventListener("click", raspundeNu);
 retryBtn.addEventListener("click", reseteazaTestul);
-
-// Încarcă prima întrebare când pagina se încarcă
-afiseazaIntrebarea();
+afiseazaPagina();
