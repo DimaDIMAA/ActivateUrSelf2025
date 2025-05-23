@@ -1,196 +1,359 @@
 body {
-  font-family: 'Arial', sans-serif;
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 20px;
-  background-color: #f5f5f5;
-  line-height: 1.6;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f6f7fb;
+  color: #222;
 }
 
-#quiz-section, #result-section {
-  background: white;
-  padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  margin-bottom: 25px;
-}
-
-#question-text {
-  font-size: 1.3rem;
-  margin-bottom: 30px;
-  min-height: 80px;
-  color: #2c3e50;
-}
-
-.buttons {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 30px;
-}
-
-.buttons button {
-  flex: 1;
-  padding: 12px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  border: 2px solid #3498db;
-  background-color: white;
-  color: #3498db;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-  font-weight: bold;
-}
-
-#btn-yes {
-  border-color: #2ecc71;
-  color: #2ecc71;
-}
-
-#btn-no {
-  border-color: #e74c3c;
-  color: #e74c3c;
-}
-
-.buttons button:hover,
-.buttons button:focus {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-#btn-yes:hover {
-  background-color: #2ecc71;
-  color: white;
-}
-
-#btn-no:hover {
-  background-color: #e74c3c;
-  color: white;
-}
-
-/* Progress container */
-#progress-container {
+/* HEADER */
+.top-header {
+  position: sticky;
+  top: 0;
   width: 100%;
-  margin: 30px 0;
+  background-color: #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  z-index: 1000;
+}
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+}
+.header-logo {
+  height: 38px;
+}
+.header-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1d3557;
+  margin-left: 12px;
 }
 
+/* LAYOUT */
+.split-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main-content {
+  width: 100%;
+  max-width: 760px;
+  padding: 40px 24px;
+}
+.quiz-container {
+  background: transparent;
+}
+
+/* PROGRES */
+.progress-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  color: #333;
+}
 #progress-bar {
-  height: 10px;
-  background-color: #ecf0f1;
-  border-radius: 5px;
+  flex: 1;
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
   overflow: hidden;
-  margin-bottom: 8px;
 }
-
 #progress-bar-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #3498db, #2980b9);
-  transition: width 0.4s ease;
+  background-color: #007a3d;
+  transition: width 0.3s ease;
 }
 
-#progress-text {
+/* LEGENDA */
+.likert-legend {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.legend-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #444;
+}
+.legend-option .circle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  margin-bottom: 6px;
+  border: 2px solid transparent;
+}
+
+/* TITLU */
+.quiz-title {
+  font-size: 1.1rem;
   text-align: center;
-  color: #7f8c8d;
-  font-size: 0.9rem;
+  margin-bottom: 24px;
 }
 
-/* Results section */
-#result-section h2 {
-  color: #2c3e50;
+/* ÎNTREBĂRI */
+.question-block {
+  background-color: #ffffff;
+  padding: 18px 20px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.question-block p {
+  font-weight: 500;
+  margin-bottom: 14px;
   text-align: center;
-  margin-bottom: 25px;
-  border-bottom: 2px solid #3498db;
-  padding-bottom: 10px;
 }
-
-#result-list {
-  margin: 20px 0;
-}
-
-.result-item {
-  margin-bottom: 15px;
-  padding: 15px;
-  background-color: #f8f9fa;
-  border-radius: 6px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.domain-name {
-  font-weight: bold;
-  color: #2c3e50;
-  margin-bottom: 8px;
+.likert-scale {
   display: flex;
   justify-content: space-between;
+  gap: 6px;
 }
-
-.progress-container {
+.likert-option {
+  flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.75rem;
+  color: #333;
+  gap: 6px;
 }
 
-.progress-score {
-  min-width: 40px;
-  text-align: right;
-  font-weight: bold;
-  color: #3498db;
+/* BULINE – neselectate */
+.likert-option[data-val="0.2"] .circle {
+  background-color: #ffe6e6;
+  border-color: #ffb3b3;
+}
+.likert-option[data-val="0.4"] .circle {
+  background-color: #ffeacc;
+  border-color: #ffd699;
+}
+.likert-option[data-val="0.6"] .circle {
+  background-color: #f0f0f0;
+  border-color: #cccccc;
+}
+.likert-option[data-val="0.8"] .circle {
+  background-color: #dbf5e9;
+  border-color: #a8e6cf;
+}
+.likert-option[data-val="1"] .circle,
+.likert-option[data-val="1.0"] .circle {
+  background-color: #ccf5e1;
+  border-color: #8ee4c1;
 }
 
-.progress-bar-background {
-  flex-grow: 1;
-  height: 12px;
-  background-color: #ecf0f1;
-  border-radius: 6px;
-  overflow: hidden;
+/* BULINE – selectate */
+.likert-option.selected[data-val="0.2"] .circle {
+  background-color: #ff6961;
+  border-color: #ff6961;
+  box-shadow: 0 0 0 2px rgba(255, 105, 97, 0.3);
+}
+.likert-option.selected[data-val="0.4"] .circle {
+  background-color: #ffb347;
+  border-color: #ffb347;
+  box-shadow: 0 0 0 2px rgba(255, 179, 71, 0.3);
+}
+.likert-option.selected[data-val="0.6"] .circle {
+  background-color: #c0c0c0;
+  border-color: #c0c0c0;
+  box-shadow: 0 0 0 2px rgba(192, 192, 192, 0.3);
+}
+.likert-option.selected[data-val="0.8"] .circle {
+  background-color: #50e3c2;
+  border-color: #50e3c2;
+  box-shadow: 0 0 0 2px rgba(80, 227, 194, 0.3);
+}
+.likert-option.selected[data-val="1"] .circle,
+.likert-option.selected[data-val="1.0"] .circle {
+  background-color: #1fd38a;
+  border-color: #1fd38a;
+  box-shadow: 0 0 0 2px rgba(31, 211, 138, 0.3);
 }
 
-.progress-bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #3498db, #2980b9);
-  border-radius: 6px;
+/* BIFA */
+.circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid #ccc;
+  display: inline-block;
+  position: relative;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 0 2px transparent;
+}
+.circle::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 5px;
+  border: solid black;
+  border-width: 0 0 2.5px 2.5px;
+  transform: rotate(-45deg);
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  opacity: 0;
+}
+.likert-option.selected .circle::after {
+  opacity: 1;
 }
 
-#retry-btn {
+/* BUTON CONTINUARE */
+.btn-next {
   display: block;
-  width: 100%;
-  padding: 12px;
-  background-color: #27ae60;
+  margin: 40px auto 0 auto;
+  width: 100%; /* lățime completă */
+  max-width: 540px; /* limitare ca în model */
+  height: 56px;
+  background-color: #007a3d;
   color: white;
   border: none;
-  border-radius: 6px;
-  font-size: 1rem;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 20px;
-  font-weight: bold;
-}
-
-#retry-btn:hover {
-  background-color: #219150;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.tip {
-  font-style: italic;
-  color: #7f8c8d;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
-  margin-top: 25px;
-  font-size: 0.9rem;
+}
+.btn-next:hover {
+  background-color: #006633;
+  transform: scale(1.02);
+}
+.quiz-warning {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 24px;
+  margin-bottom: -20px;
 }
 
-/* Responsive adjustments */
-@media (max-width: 640px) {
-  body {
-    margin: 20px auto;
-    padding: 15px;
-  }
-  
-  #quiz-section, #result-section {
-    padding: 20px 15px;
-  }
-  
-  .buttons {
-    flex-direction: column;
-  }
+/* SECTIUNE REZULTATE */
+#result-section {
+  text-align: center;
 }
+#result-list p {
+  margin: 8px 0;
+  font-weight: 500;
+}
+#retry-btn {
+  margin-top: 20px;
+  background-color: #007a3d;
+  color: white;
+  padding: 10px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#retry-btn:hover {
+  background-color: #006633;
+}
+.likert-legend.minimalist {
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+.likert-legend.minimalist .circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+.question-block.error {
+  border: 2px solid #cc0000;
+}
+.likert-legend.aligned {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  margin: 24px 0 28px 0;
+  padding: 0 10px;
+}
+
+.likert-legend.aligned .legend-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #333;
+  gap: 6px;
+}
+
+.likert-legend.aligned .legend-option .circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  background-color: #f0f0f0;
+}
+
+.likert-legend.aligned .legend-option[data-val="0.2"] .circle {
+  background-color: #ffe6e6;
+  border: 2px solid #ff6666;
+}
+.likert-legend.aligned .legend-option[data-val="0.4"] .circle {
+  background-color: #ffeacc;
+  border: 2px solid #ff9900;
+}
+.likert-legend.aligned .legend-option[data-val="0.6"] .circle {
+  background-color: #f0f0f0;
+  border: 2px solid #999999;
+}
+.likert-legend.aligned .legend-option[data-val="0.8"] .circle {
+  background-color: #dbf5e9;
+  border: 2px solid #43d9ac;
+}
+.likert-legend.aligned .legend-option[data-val="1.0"] .circle {
+  background-color: #ccf5e1;
+  border: 2px solid #1fd38a;
+}
+
+/* Efect la hover pentru bulinele din quiz (ca în exemplu) */
+.likert-option[data-val="0.2"]:hover .circle {
+  border: 2px solid #ff6666;
+}
+.likert-option[data-val="0.4"]:hover .circle {
+  border: 2px solid #ff9900;
+}
+.likert-option[data-val="0.6"]:hover .circle {
+  border: 2px solid #999999;
+}
+.likert-option[data-val="0.8"]:hover .circle {
+  border: 2px solid #43d9ac;
+}
+.likert-option[data-val="1"]:hover .circle,
+.likert-option[data-val="1.0"]:hover .circle {
+  border: 2px solid #1fd38a;
+}
+/* Efect de hover pentru bulinele din exemplu (aligned legend) */
+.likert-legend.aligned .legend-option[data-val="0.2"] .circle:hover {
+  border: 2px solid #ff6666;
+}
+.likert-legend.aligned .legend-option[data-val="0.4"] .circle:hover {
+  border: 2px solid #ff9900;
+}
+.likert-legend.aligned .legend-option[data-val="0.6"] .circle:hover {
+  border: 2px solid #999999;
+}
+.likert-legend.aligned .legend-option[data-val="0.8"] .circle:hover {
+  border: 2px solid #43d9ac;
+}
+.likert-legend.aligned .legend-option[data-val="1.0"] .circle:hover {
+  border: 2px solid #1fd38a;
+}
+
