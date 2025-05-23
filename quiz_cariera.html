@@ -3,35 +3,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Test Orientare Carieră</title>
-  <link href="./css/quiz_cariera.css" rel="stylesheet">
+  <title>Life-Skills – Test de Personalitate</title>
+  <link rel="stylesheet" href="css/quiz_cariera.css" />
 </head>
 <body>
 
-  <div id="quiz-section">
-    <h2>Test de orientare în carieră</h2>
-    
-    <div id="question-text">Încărcăm întrebările...</div>
-
-    <div class="buttons">
-      <button id="btn-yes">Da</button>
-      <button id="btn-no">Nu</button>
-    </div>
-
-    <div id="progress-container">
-      <div id="progress-bar">
-        <div id="progress-bar-fill"></div>
+  <div class="split-layout">
+    <!-- HEADER -->
+    <header class="top-header">
+      <div class="header-inner">
+        <img src="images/logo2.png" alt="Life-Skills Logo" class="header-logo">
+        <span class="header-title">Life-Skills</span>
       </div>
-      <div id="progress-text">Întrebarea 0/140</div>
-    </div>
+    </header>
+
+    <!-- CONȚINUT PRINCIPAL -->
+    <main class="main-content">
+      <div class="quiz-container">
+        
+        <!-- PROGRES -->
+        <div class="progress-info">
+          <span id="progress-percent">0%</span>
+          <div id="progress-bar"><div id="progress-bar-fill"></div></div>
+          <span id="progress-step">Pagina 1 din 25</span>
+        </div>
+
+        <!-- EXEMPLU BULINE -->
+        <div class="likert-legend aligned">
+          <div class="legend-option" data-val="0.2">
+            <div class="circle"></div>
+            <span>Dezacord total</span>
+          </div>
+          <div class="legend-option" data-val="0.4">
+            <div class="circle"></div>
+            <span>Dezacord</span>
+          </div>
+          <div class="legend-option" data-val="0.6">
+            <div class="circle"></div>
+            <span>Neutru</span>
+          </div>
+          <div class="legend-option" data-val="0.8">
+            <div class="circle"></div>
+            <span>Acord</span>
+          </div>
+          <div class="legend-option" data-val="1.0">
+            <div class="circle"></div>
+            <span>Acord total</span>
+          </div>
+        </div>
+
+        <!-- TITLU -->
+        <h1 class="quiz-title">Alege cât de precis te reprezintă afirmațiile de mai jos:</h1>
+
+        <!-- ÎNTREBĂRI -->
+        <div id="question-group"></div>
+
+      </div>
+
+      <!-- SECȚIUNE REZULTATE -->
+      <section id="result-section" style="display: none;">
+        <h2>Rezultatele tale</h2>
+        <div id="result-list"></div>
+        <button id="retry-btn">Refă testul</button>
+      </section>
+    </main>
   </div>
 
-  <div id="result-section" style="display:none;">
-    <h2>Rezultatele tale</h2>
-    <div id="result-list"></div>
-    <button id="retry-btn">Refă testul</button>
-    <p class="tip">💡 Concentrează-te pe primele 3-5 domenii care ți se potrivesc cel mai bine!</p>
-  </div>
-  <script src="./js/quiz_cariera.js" defer></script>
+  <!-- SCRIPT UNIC -->
+  <script src="js/quiz_cariera.js"></script>
 </body>
 </html>
