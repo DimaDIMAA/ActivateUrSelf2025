@@ -8,8 +8,19 @@
 </head>
 <body>
 
-  <div class="split-layout">
-    <!-- HEADER -->
+  <!-- Ecran introductiv -->
+<div id="intro-screen" class="intro-screen">
+  <img src="images/cariera.svg" alt="Intro" class="intro-image">
+  <h1>Descoperă ce carieră ți se potrivește</h1>
+  <ul class="intro-list">
+    <li>Răspunde sincer la fiecare întrebare</li>
+    <li>Nu poți sări peste întrebări, dar te poți întoarce la ele mai târziu</li>
+  </ul>
+  <button id="start-button">Începe testul</button>
+</div>
+
+
+  <div class="split-layout" id="main-quiz" style="display: none;">
     <header class="top-header">
       <div class="header-inner">
         <img src="images/logo2.png" alt="Life-Skills Logo" class="header-logo">
@@ -17,18 +28,27 @@
       </div>
     </header>
 
-    <!-- CONȚINUT PRINCIPAL -->
     <main class="main-content">
       <div class="quiz-container">
         
-        <!-- PROGRES -->
+        <!-- Progres -->
         <div class="progress-info">
           <span id="progress-percent">0%</span>
           <div id="progress-bar"><div id="progress-bar-fill"></div></div>
-          <span id="progress-step">Pagina 1 din 25</span>
+          <span id="progress-step">Pas 1 din 25</span>
         </div>
 
-        <!-- EXEMPLU BULINE -->
+        <!-- Legendă -->
+         <div class="quiz-title-row">
+  <div class="back-arrow" id="back-arrow" style="display: none;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+      <polyline points="15 18 9 12 15 6"></polyline>
+    </svg>
+  </div>
+  <h1 class="quiz-title">Alege cât de precis te reprezintă afirmațiile de mai jos:</h1>
+</div>
+        
         <div class="likert-legend aligned">
           <div class="legend-option" data-val="0.2">
             <div class="circle"></div>
@@ -52,15 +72,10 @@
           </div>
         </div>
 
-        <!-- TITLU -->
-        <h1 class="quiz-title">Alege cât de precis te reprezintă afirmațiile de mai jos:</h1>
-
-        <!-- ÎNTREBĂRI -->
+        
         <div id="question-group"></div>
-
       </div>
 
-      <!-- SECȚIUNE REZULTATE -->
       <section id="result-section" style="display: none;">
         <h2>Rezultatele tale</h2>
         <div id="result-list"></div>
@@ -69,7 +84,6 @@
     </main>
   </div>
 
-  <!-- SCRIPT UNIC -->
   <script src="js/quiz_cariera.js"></script>
 </body>
 </html>
