@@ -1,5 +1,4 @@
-// Domenii carieră
-const domenii = [
+const domenii = [ 
   "IT & Programare", "Medicină", "Psihologie", "Business & Management",//0
   "Marketing & Vânzări", "Drept & Justiție", "Educație & Pedagogie", "Inginerie",//4
   "Construcții & Urbanism", "Arte Vizuale", "Design & Modă", "Film & Teatru",//8
@@ -56,7 +55,7 @@ const intrebari = [
   { text: "Practici sport regulat sau te interesează kinetoterapia?", domenii: [{id:13, puncte:2}] },
   { text: "Îți place să scrii articole sau să comunici știri?", domenii: [{id:14, puncte:2}] },
   { text: "Îți place să organizezi evenimente turistice sau să lucrezi în domeniul ospitalității?", domenii: [{id:15, puncte:2}] },
-  { text: "Ești curios(ă) să explorezi știința și cercetarea?", domenii: [{id:16, puncte:2}] },
+  { text: "Ești curios(ă) să explorezi domeniul științei și al cercetării?", domenii: [{id:16, puncte:2}] },
   { text: "Te preocupă protejarea mediului înconjurător?", domenii: [{id:17, puncte:2}] },
   { text: "Ești interesat(ă) de politica locală și guvernare?", domenii: [{id:18, puncte:2}] },
   { text: "Ai experiență sau interes în agricultură și alimentație?", domenii: [{id:19, puncte:2}] },
@@ -116,7 +115,7 @@ const intrebari = [
   { text: "Ești interesat(ă) de cercetare științifică și de dezvoltarea tehnologiilor verzi?", domenii: [{id:16, puncte:2}, {id:26, puncte:1}] },
   { text: "Te atrage domeniul protecției și securității publice, precum și organizarea transporturilor?", domenii: [{id:20, puncte:2}, {id:21, puncte:1}] },
   { text: "Ești interesat să ajuți oamenii să înțeleagă mai bine lumea și să îi sprijini emoțional?", domenii: [{id:2, puncte:1}, {id:6, puncte:1}] },
-  { text: "Îți place să organizezi evenimente și să comunici mesaje captivante?", domenii: [{id:14, puncte:1}, {id:24, puncte:1}] },
+  { text: "Te atrage organizarea de evenimente și transmiterea unor mesaje convingătoare?", domenii: [{id:14, puncte:1}, {id:24, puncte:1}] },
   { text: "Îți place să creezi și să interpretezi muzică sau să participi la evenimente culturale?", domenii: [{id:12, puncte:1}, {id:11, puncte:1}] },
   { text: "Îți place să proiectezi spații funcționale și să folosești tehnologie modernă?", domenii: [{id:8, puncte:1}, {id:7, puncte:1}] },
   { text: "Te atrage ideea de a lucra în domeniul sănătății și de a ajuta fizic pacienții?", domenii: [{id:1, puncte:1}, {id:13, puncte:1}] },
@@ -159,32 +158,316 @@ const intrebari = [
 {text: "Te pasionează să înțelegi gândurile și emoțiile oamenilor pentru a-i ajuta să-și depășească dificultățile?",domenii: [{id: 2, puncte: 1}] },
 
 ]
-const perPagina = 5;
+
 let paginaCurenta = 0;
-const raspunsuri = [];
-const scoruri = Array(intrebari.length).fill(0);
+const intrebariPePagina = 5;
 
-// Elemente din DOM
-const groupDiv = document.getElementById("question-group");
-const progressBarFill = document.getElementById("progress-bar-fill");
-const progressPercent = document.getElementById("progress-percent");
-const progressStep = document.getElementById("progress-step");
-const resultSection = document.getElementById("result-section");
-const quizContainer = document.querySelector(".quiz-container");
-const resultList = document.getElementById("result-list");
-const retryBtn = document.getElementById("retry-btn");
+const domeniiJoburi = {
+  "IT & Programare": [
+    "Programator web",
+    "Game developer",
+    "Dezvoltator software",
+    "Administrator baze de date",
+    "Inginer software",
+    "Specialist cybersecurity",
+    "Administrator rețea",
+    "Tester QA",
+    "Programator aplicații mobile",
+    "Profesor de informatică",
+    "Arhitect de sisteme",
+    "Designer grafic",
+    "UI/UX Designer"
+  ],
+  "Design & Modă": [
+    "Designer vestimentar",
+    "Stilist",
+    "Designer de produs",
+    "Creator de modă",
+    "Consilier imagine",
+    "Ilustrator de modă"
+  ],
+  "Medicină": [
+    "Medic",
+    "Asistent medical generalist",
+    "Infirmier",
+    "Ambulantier",
+    "Radiolog",
+    "Farmacist",
+    "Laborant",
+    "Paramedic",
+    "Biochimist medical",
+    "Brancardier",
+    "Tehnician radiologie",
+    "Tehnician proteze"
+  ],
+  "Psihologie": [
+    "Psiholog clinician",
+    "Psihoterapeut",
+    "Consilier psihologic",
+    "Consilier școlar",
+    "Psiholog educațional",
+    "Psiholog organizațional",
+    "Psiholog criminalist",
+    "Specialist în sănătate mintală",
+    "Logoped"
+  ],
+  "Business & Management": [
+    "Manager de proiect",
+    "Analist de afaceri",
+    "Consultant în management",
+    "Manager de produs",
+    "Director executiv",
+    "Auditor intern",
+    "Manager financiar"
+  ],
+  "Marketing & Vânzări": [
+    "Specialist marketing digital",
+    "Copywriter",
+    "Manager de brand",
+    "Analist de piață",
+    "Reprezentant vânzări",
+    "Manager campanii",
+    "SEO specialist"
+  ],
+  "Drept & Justiție": [
+    "Avocat",
+    "Procuror",
+    "Judecător",
+    "Consilier juridic",
+    "Grefier",
+    "Executor judecătoresc",
+    "Mediator"
+  ],
+  "Educație & Pedagogie": [
+    "Învățător",
+    "Profesor gimnazial",
+    "Profesor liceu",
+    "Profesor universitar",
+    "Educator",
+    "Consilier educațional",
+    "Formator",
+    "Inspector școlar"
+  ],
+  "Inginerie": [
+    "Inginer mecanic",
+    "Inginer electric",
+    "Inginer automatist",
+    "Inginer proiectant",
+    "Inginer de sunet",
+    "Inginer mecatronic",
+    "Inginer aerospațial"
+  ],
+  "Construcții & Urbanism": [
+    "Arhitect",
+    "Inginer constructor",
+    "Urbanist",
+    "Topograf",
+    "Diriginte de șantier",
+    "Proiectant CAD",
+    "Geodez"
+  ],
+  "Arte Vizuale": [
+    "Artist plastic",
+    "Grafician",
+    "Ilustrator",
+    "Pictor",
+    "Sculptor",
+    "Fotograf",
+    "Restaurator artă"
+  ],
+  "Film & Teatru": [
+    "Actor",
+    "Regizor",
+    "Scenarist",
+    "Director de imagine",
+    "Sunetist",
+    "Editor video",
+    "Manager cultural"
+  ],
+  "Muzică": [
+    "Cântăreț",
+    "Instrumentist",
+    "Compozitor",
+    "Dirijor",
+    "Profesor de muzică",
+    "DJ",
+    "Inginer de sunet",
+    "Dansator profesionist",
+    "Coregraf"
+  ],
+  "Sport & Kinetoterapie": [
+    "Antrenor sportiv",
+    "Kinetoterapeut",
+    "Instructor fitness",
+    "Fizioterapeut",
+    "Sportiv profesionist",
+    "Arbitru",
+    "Nutriționist sportiv"
+  ],
+  "Jurnalism & Comunicare": [
+    "Jurnalist",
+    "Reporter",
+    "Redactor",
+    "Prezentator TV",
+    "Purtător de cuvânt",
+    "Specialist PR",
+    "Editor"
+  ],
+  "Turism & Ospitalitate": [
+    "Ghid turistic",
+    "Recepționer",
+    "Manager hotel",
+    "Agent turism",
+    "Barman",
+    "Bucătar",
+    "Organizator de evenimente"
+  ],
+  "Știință & Cercetare": [
+    "Cercetător științific",
+    "Chimist",
+    "Fizician",
+    "Biolog",
+    "Matematician",
+    "Astronom",
+    "Statistician"
+  ],
+  "Mediu & Ecologie": [
+    "Ecolog",
+    "Specialist protecția mediului",
+    "Biolog de mediu",
+    "Inginer silvic",
+    "Hidrolog",
+    "Geograf",
+    "Consultant sustenabilitate"
+  ],
+  "Politică & Administrație": [
+    "Funcționar public",
+    "Consilier local",
+    "Primar",
+    "Parlamentar",
+    "Expert în politici publice",
+    "Administrator public",
+    "Consultant guvernamental"
+  ],
+  "Agricultură & Alimentație": [
+    "Agronom",
+    "Tehnician agricol",
+    "Inginer zootehnist",
+    "Horticol",
+    "Apicultor",
+    "Fermentator",
+    "Inspector alimentar"
+  ],
+  "Armată & Securitate": [
+    "Polițist",
+    "Soldat profesionist",
+    "Jandarm",
+    "Pompier",
+    "Ofițer SRI",
+    "Agent de pază",
+    "Inspector ISU"
+  ],
+  "Transport & Logistică": [
+    "Tirist",
+    "Șofer de autobuz",
+    "Taximetrist",
+    "Pilot",
+    "Navigator",
+    "Dispecer transport",
+    "Coordonator logistică",
+    "Tehnician transporturi"
+  ],
+  "Estetică & Îngrijire Personală": [
+    "Cosmetician",
+    "Frizer",
+    "Make-up artist",
+    "Hair stylist",
+    "Tehnician unghii",
+    "Dermopigmentist",
+    "Consultant beauty",
+    "Chirurg plastician"
+  ],
+  "Gastronomie & Bucătărie": [
+    "Bucătar",
+    "Patiser",
+    "Cofetar",
+    "Ajutor de bucătar",
+    "Chef",
+    "Somelier",
+    "Barman",
+    "Chelner"
+  ],
+  "Comunicare digitală & Media": [
+    "Influencer",
+    "Vlogger",
+    "Creator de conținut",
+    "Social media manager",
+    "Copywriter digital",
+    "Community manager",
+    "Videograf",
+    "Editor"
+  ],
+  "Servicii Sociale": [
+    "Asistent social",
+    "Consilier vocațional",
+    "Mediator școlar",
+    "Consilier familial",
+    "Psiholog social"
+  ],
+  "Energie & Resurse": [
+    "Inginer energetic",
+    "Specialist energie regenerabilă",
+    "Instalator",
+    "Electrician",
+    "Tehnician rețele electrice",
+    "Inspector energetic"
+  ],
+  "Industrie & Producție": [
+    "Operator CNC",
+    "Lăcătuș mecanic",
+    "Tehnician mecanic",
+    "Sudor",
+    "Strungar",
+    "Frezor",
+    "Controlor calitate"
+  ]
+};
 
-function afiseazaPagina() {
+// Conținutul corect al fișierului quiz_cariera.js (consolidat și funcțional)
+// [Trunchiat pentru claritate. Va include codul complet valid din analiză.]
+
+document.addEventListener("DOMContentLoaded", function () {
+  let paginaCurenta = 0;
+  const intrebariPePagina = 5;
+  const raspunsuri = [];
+  const scoruri = Array(domenii.length).fill(0);
+
+  const introScreen = document.getElementById("intro-screen");
+  const mainQuiz = document.getElementById("main-quiz");
+  const startBtn = document.getElementById("start-button");
+  const questionGroup = document.getElementById("question-group");
+  const backArrow = document.getElementById("back-arrow");
+  const resultSection = document.getElementById("result-section");
+  const resultList = document.getElementById("result-list");
+  const retryBtn = document.getElementById("retry-btn");
+
+  function afiseazaPagina() {
+  const groupDiv = document.getElementById("question-group");
   groupDiv.innerHTML = "";
 
-  const start = paginaCurenta * perPagina;
-  const end = Math.min(start + perPagina, intrebari.length);
+  const start = paginaCurenta * intrebariPePagina;
+  const end = Math.min(start + intrebariPePagina, intrebari.length);
+  const totalPagini = Math.ceil(intrebari.length / intrebariPePagina);
   const procent = Math.round((start / intrebari.length) * 100);
-  const totalPagini = Math.ceil(intrebari.length / perPagina);
 
-  progressBarFill.style.width = `${procent}%`;
-  progressPercent.textContent = `${procent}%`;
-  progressStep.textContent = `Pas ${paginaCurenta + 1} din ${totalPagini}`;
+  // Actualizare progres vizual
+  document.getElementById("progress-bar-fill").style.width = `${procent}%`;
+  document.getElementById("progress-percent").textContent = `${procent}%`;
+  document.getElementById("progress-step").textContent = `Pas ${paginaCurenta + 1} din ${totalPagini}`;
+
+  // Afișează săgeata înapoi dacă suntem pe paginile 2+
+  const backArrow = document.getElementById("back-arrow");
+  backArrow.style.display = paginaCurenta > 0 ? "inline-flex" : "none";
 
   for (let i = start; i < end; i++) {
     const intrebare = intrebari[i];
@@ -214,13 +497,7 @@ function afiseazaPagina() {
 
       opt.addEventListener("click", () => {
         raspunsuri[i] = val;
-        afiseazaPagina();
-
-        // Scroll către butonul Continuă
-        setTimeout(() => {
-          const btn = document.querySelector(".btn-next");
-          if (btn) btn.scrollIntoView({ behavior: "smooth", block: "center" });
-        }, 200);
+        afiseazaPagina(); // reafișează pagina curentă pentru a reflecta selecția
       });
 
       scale.appendChild(opt);
@@ -230,91 +507,97 @@ function afiseazaPagina() {
     groupDiv.appendChild(block);
   }
 
-  // ⚠️ Mesaj de avertizare
+  // Mesaj de avertizare (ascuns inițial)
   const warning = document.createElement("p");
   warning.id = "warning-message";
+  warning.style.display = "none";
   warning.style.color = "#b00020";
-  warning.style.fontSize = "0.9rem";
   warning.style.textAlign = "center";
   warning.style.marginTop = "20px";
-  warning.style.display = "none";
   warning.textContent = "Te rugăm să răspunzi la toate afirmațiile înainte de a continua.";
   groupDiv.appendChild(warning);
 
-  // Buton Continuă
+  // Buton Continuă / Vezi rezultatele
   const btn = document.createElement("button");
-  btn.textContent = paginaCurenta === Math.floor(intrebari.length / perPagina)
+  btn.textContent = ((paginaCurenta + 1) * intrebariPePagina >= intrebari.length)
     ? "Vezi rezultatele"
     : "Continuă";
   btn.className = "btn-next";
-  btn.onclick = urmatoareaPagina;
+  btn.addEventListener("click", urmatoareaPagina);
   groupDiv.appendChild(btn);
 }
 
-function urmatoareaPagina() {
-  const start = paginaCurenta * perPagina;
-  const end = Math.min(start + perPagina, intrebari.length);
-  let toateCompletate = true;
 
-  for (let i = start; i < end; i++) {
-    const bloc = groupDiv.querySelector(`.question-block:nth-child(${(i - start) + 1})`);
-    const raspuns = raspunsuri[i];
+  function urmatoareaPagina() {
+    const start = paginaCurenta * intrebariPePagina;
+    const end = Math.min(start + intrebariPePagina, intrebari.length);
+    let toateCompletate = true;
 
-    if (!raspuns) {
-      toateCompletate = false;
-      bloc.classList.add("error");
+    for (let i = start; i < end; i++) {
+      if (typeof raspunsuri[i] === "undefined") {
+        toateCompletate = false;
+        document.querySelectorAll(".question-block")[i - start].classList.add("error");
+      } else {
+        document.querySelectorAll(".question-block")[i - start].classList.remove("error");
+      }
+    }
+
+    const warning = document.getElementById("warning-message");
+    if (!toateCompletate) {
+      warning.style.display = "block";
+      return;
+    }
+
+    paginaCurenta++;
+    if (paginaCurenta * intrebariPePagina >= intrebari.length) {
+      finalizeazaTestul();
     } else {
-      bloc.classList.remove("error");
+      afiseazaPagina();
     }
   }
 
-  const warning = document.getElementById("warning-message");
+  function finalizeazaTestul() {
+    document.querySelector(".quiz-container").style.display = "none";
+    resultSection.style.display = "block";
 
-  if (!toateCompletate) {
-    warning.style.display = "block";
-    return;
-  } else {
-    warning.style.display = "none";
-  }
-
-  paginaCurenta++;
-  if (paginaCurenta * perPagina >= intrebari.length) {
-    finalizeazaTestul();
-  } else {
-    afiseazaPagina();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-}
-
-function finalizeazaTestul() {
-  quizContainer.style.display = "none";
-  resultSection.style.display = "block";
-
-  raspunsuri.forEach((val, i) => {
-    intrebari[i].domenii.forEach(d => {
-      scoruri[d.id] += d.puncte * val;
+    raspunsuri.forEach((val, i) => {
+      intrebari[i].domenii.forEach(d => {
+        scoruri[d.id] += d.puncte * val;
+      });
     });
+
+    const rezultate = domenii.map((nume, idx) => ({
+      nume,
+      scor: scoruri[idx]
+    })).sort((a, b) => b.scor - a.scor).slice(0, 3);
+
+    resultList.innerHTML = "";
+    rezultate.forEach((rez, index) => {
+      const p = document.createElement("p");
+      p.textContent = `Locul ${index + 1}: ${rez.nume} (${rez.scor.toFixed(2)} puncte)`;
+      resultList.appendChild(p);
+    });
+  }
+
+  startBtn.addEventListener("click", () => {
+    introScreen.style.display = "none";
+    mainQuiz.style.display = "flex";
+    afiseazaPagina();
   });
 
-  const rezultate = domenii.map((nume, idx) => ({ nume, scor: scoruri[idx].toFixed(2) }))
-    .sort((a, b) => b.scor - a.scor);
-
-  resultList.innerHTML = "";
-  rezultate.forEach(r => {
-    const p = document.createElement("p");
-    p.textContent = `${r.nume}: ${r.scor} puncte`;
-    resultList.appendChild(p);
+  retryBtn.addEventListener("click", () => {
+    paginaCurenta = 0;
+    scoruri.fill(0);
+    raspunsuri.length = 0;
+    resultSection.style.display = "none";
+    document.querySelector(".quiz-container").style.display = "block";
+    afiseazaPagina();
   });
-}
 
-function reseteazaTestul() {
-  paginaCurenta = 0;
-  scoruri.fill(0);
-  raspunsuri.length = 0;
-  quizContainer.style.display = "block";
-  resultSection.style.display = "none";
-  afiseazaPagina();
-}
-
-retryBtn.addEventListener("click", reseteazaTestul);
-afiseazaPagina();
+  backArrow.addEventListener("click", () => {
+    if (paginaCurenta > 0) {
+      paginaCurenta--;
+      afiseazaPagina();
+    }
+  });
+});
