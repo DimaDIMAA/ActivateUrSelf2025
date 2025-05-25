@@ -41,10 +41,16 @@ body {
   width: 100%;
   max-width: 760px;
   padding: 40px 24px;
+  margin: 0 auto; /* ADĂUGAT pentru centrare */
 }
+
 .quiz-container {
   background: transparent;
+  width: 100%;
+  max-width: 760px; /* Adăugat pentru lățime consistentă */
+  margin: 0 auto;    /* ADĂUGAT pentru centrare */
 }
+
 
 /* PROGRES */
 .progress-info {
@@ -97,6 +103,13 @@ body {
 .quiz-title {
   font-size: 1.1rem;
   text-align: center;
+  margin-bottom: 24px;
+}
+.quiz-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
   margin-bottom: 24px;
 }
 
@@ -356,4 +369,192 @@ body {
 .likert-legend.aligned .legend-option[data-val="1.0"] .circle:hover {
   border: 2px solid #1fd38a;
 }
+.back-arrow {
+  cursor: pointer;
+  padding: 6px 10px;
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.2s ease;
+  z-index: 10;
+  margin-right: 12px;
+}
 
+.back-arrow svg {
+  width: 20px;
+  height: 20px;
+  stroke: #333;
+  transition: stroke 0.3s ease, transform 0.2s ease;
+}
+
+.back-arrow:hover svg {
+  stroke: #007a3d;
+  transform: translateX(-3px);
+}
+
+
+#intro-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff; /* fundal alb doar la început */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 9999;
+  padding: 40px 20px;
+}
+
+.intro-content {
+  background-color: #fff;
+  padding: 48px 32px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  max-width: 560px;
+  width: 100%;
+}
+
+.intro-image {
+  width: 160px;
+  height: auto;
+  margin: 0 auto 32px auto;
+  display: block;
+}
+
+.intro-content h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1d3557;
+  margin-bottom: 24px;
+}
+
+.intro-content ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 36px;
+  font-size: 1.15rem;
+  color: #333;
+}
+
+.intro-content ul li {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.intro-content ul li::before {
+  content: "✔";
+  color: #007a3d;
+  font-weight: bold;
+}
+
+#start-btn {
+  background-color: #007a3d;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 28px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+#start-btn:hover {
+  background-color: #006333;
+}
+/* INTRO SCREEN */
+.intro-screen {
+  background-color: #ffffff;
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.intro-image {
+  width: 260px;
+  max-width: 80%;
+  margin-bottom: 24px;
+}
+
+.intro-screen h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 14px;
+  color: #1d3557;
+}
+
+.intro-screen p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 30px;
+  max-width: 480px;
+}
+
+#start-button {
+  padding: 14px 32px;
+  font-size: 1.05rem;
+  background-color: #007a3d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+#start-button:hover {
+  background-color: #006633;
+}
+
+/* Listă sfaturi */
+.intro-screen ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+  font-size: 1.1rem;
+  color: #333;
+  max-width: 480px;
+}
+
+.intro-screen ul li {
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.intro-screen ul li::before {
+  content: "✔";
+  color: #007a3d;
+  font-weight: bold;
+}
+
+/* Buton full-width ca propozitiile */
+#start-button {
+  padding: 14px 28px;
+  font-size: 1.05rem;
+  background-color: #007a3d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 480px;
+}
