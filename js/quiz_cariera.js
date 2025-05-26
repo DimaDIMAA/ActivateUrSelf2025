@@ -159,8 +159,6 @@ const intrebari = [
 
 ]
 
-let paginaCurenta = 0;
-const intrebariPePagina = 5;
 
 const domeniiJoburi = {
   "IT & Programare": [
@@ -433,155 +431,33 @@ const domeniiJoburi = {
   ]
 };
 
-// Conținutul corect al fișierului quiz_cariera.js (consolidat și funcțional)
-// [Trunchiat pentru claritate. Va include codul complet valid din analiză.]
 
-document.addEventListener("DOMContentLoaded", function () {
-  let paginaCurenta = 0;
+document.addEventListener("DOMContentLoaded", () => {
+  const perPagina = 5;
   const intrebariPePagina = 5;
+  let paginaCurenta = 0;
   const raspunsuri = [];
-  const scoruri = Array(domenii.length).fill(0);
+  const scoruri = Array(28).fill(0);
+
+  const groupDiv = document.getElementById("question-group");
+  const progressBarFill = document.getElementById("progress-bar-fill");
+  const progressPercent = document.getElementById("progress-percent");
+  const progressStep = document.getElementById("progress-step");
+  const resultSection = document.getElementById("result-section");
+  const resultList = document.getElementById("result-list");
+  const retryBtn = document.getElementById("retry-btn");
+  const backArrow = document.getElementById("back-arrow");
+  const quizContainer = document.querySelector(".quiz-container");
 
   const introScreen = document.getElementById("intro-screen");
   const mainQuiz = document.getElementById("main-quiz");
   const startBtn = document.getElementById("start-button");
-  const questionGroup = document.getElementById("question-group");
-  const backArrow = document.getElementById("back-arrow");
-  const resultSection = document.getElementById("result-section");
-  const resultList = document.getElementById("result-list");
-  const retryBtn = document.getElementById("retry-btn");
 
-  function afiseazaPagina() {
-  const groupDiv = document.getElementById("question-group");
-  groupDiv.innerHTML = "";
-
-  const start = paginaCurenta * intrebariPePagina;
-  const end = Math.min(start + intrebariPePagina, intrebari.length);
-  const totalPagini = Math.ceil(intrebari.length / intrebariPePagina);
-  const procent = Math.round((start / intrebari.length) * 100);
-
-  // Actualizare progres vizual
-  document.getElementById("progress-bar-fill").style.width = `${procent}%`;
-  document.getElementById("progress-percent").textContent = `${procent}%`;
-  document.getElementById("progress-step").textContent = `Pas ${paginaCurenta + 1} din ${totalPagini}`;
-
-  // Afișează săgeata înapoi dacă suntem pe paginile 2+
-  const backArrow = document.getElementById("back-arrow");
-  backArrow.style.display = paginaCurenta > 0 ? "inline-flex" : "none";
-
-  for (let i = start; i < end; i++) {
-    const intrebare = intrebari[i];
-    const block = document.createElement("div");
-    block.className = "question-block";
-
-    const p = document.createElement("p");
-    p.textContent = intrebare.text;
-    block.appendChild(p);
-
-    const scale = document.createElement("div");
-    scale.className = "likert-scale";
-
-    [0.2, 0.4, 0.6, 0.8, 1.0].forEach(val => {
-      const opt = document.createElement("div");
-      opt.className = "likert-option";
-      opt.dataset.index = i;
-      opt.dataset.val = val;
-
-      const circle = document.createElement("div");
-      circle.className = "circle";
-      opt.appendChild(circle);
-
-      if (raspunsuri[i] === val) {
-        opt.classList.add("selected");
-      }
-
-      opt.addEventListener("click", () => {
-        raspunsuri[i] = val;
-        afiseazaPagina(); // reafișează pagina curentă pentru a reflecta selecția
-      });
-
-      scale.appendChild(opt);
-    });
-
-    block.appendChild(scale);
-    groupDiv.appendChild(block);
-  }
-
-  // Mesaj de avertizare (ascuns inițial)
-  const warning = document.createElement("p");
-  warning.id = "warning-message";
-  warning.style.display = "none";
-  warning.style.color = "#b00020";
-  warning.style.textAlign = "center";
-  warning.style.marginTop = "20px";
-  warning.textContent = "Te rugăm să răspunzi la toate afirmațiile înainte de a continua.";
-  groupDiv.appendChild(warning);
-
-  // Buton Continuă / Vezi rezultatele
-  const btn = document.createElement("button");
-  btn.textContent = ((paginaCurenta + 1) * intrebariPePagina >= intrebari.length)
-    ? "Vezi rezultatele"
-    : "Continuă";
-  btn.className = "btn-next";
-  btn.addEventListener("click", urmatoareaPagina);
-  groupDiv.appendChild(btn);
-}
-
-
-  function urmatoareaPagina() {
-    const start = paginaCurenta * intrebariPePagina;
-    const end = Math.min(start + intrebariPePagina, intrebari.length);
-    let toateCompletate = true;
-
-    for (let i = start; i < end; i++) {
-      if (typeof raspunsuri[i] === "undefined") {
-        toateCompletate = false;
-        document.querySelectorAll(".question-block")[i - start].classList.add("error");
-      } else {
-        document.querySelectorAll(".question-block")[i - start].classList.remove("error");
-      }
-    }
-
-    const warning = document.getElementById("warning-message");
-    if (!toateCompletate) {
-      warning.style.display = "block";
-      return;
-    }
-
-    paginaCurenta++;
-    if (paginaCurenta * intrebariPePagina >= intrebari.length) {
-      finalizeazaTestul();
-    } else {
-      afiseazaPagina();
-    }
-  }
-
-  function finalizeazaTestul() {
-    document.querySelector(".quiz-container").style.display = "none";
-    resultSection.style.display = "block";
-
-    raspunsuri.forEach((val, i) => {
-      intrebari[i].domenii.forEach(d => {
-        scoruri[d.id] += d.puncte * val;
-      });
-    });
-
-    const rezultate = domenii.map((nume, idx) => ({
-      nume,
-      scor: scoruri[idx]
-    })).sort((a, b) => b.scor - a.scor).slice(0, 3);
-
-    resultList.innerHTML = "";
-    rezultate.forEach((rez, index) => {
-      const p = document.createElement("p");
-      p.textContent = `Locul ${index + 1}: ${rez.nume} (${rez.scor.toFixed(2)} puncte)`;
-      resultList.appendChild(p);
-    });
-  }
+  backArrow.style.display = "none";
 
   startBtn.addEventListener("click", () => {
     introScreen.style.display = "none";
-    mainQuiz.style.display = "flex";
+    mainQuiz.style.display = "block";
     afiseazaPagina();
   });
 
@@ -589,8 +465,8 @@ document.addEventListener("DOMContentLoaded", function () {
     paginaCurenta = 0;
     scoruri.fill(0);
     raspunsuri.length = 0;
+    quizContainer.style.display = "block";
     resultSection.style.display = "none";
-    document.querySelector(".quiz-container").style.display = "block";
     afiseazaPagina();
   });
 
@@ -598,6 +474,199 @@ document.addEventListener("DOMContentLoaded", function () {
     if (paginaCurenta > 0) {
       paginaCurenta--;
       afiseazaPagina();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   });
+
+  function afiseazaPagina() {
+    groupDiv.innerHTML = "";
+
+    if (paginaCurenta > 0) {
+      backArrow.style.display = "inline-block";
+    } else {
+      backArrow.style.display = "none";
+    }
+
+    const start = paginaCurenta * perPagina;
+    const end = Math.min(start + perPagina, intrebari.length);
+    const procent = Math.round((start / intrebari.length) * 100);
+    const totalPagini = Math.ceil(intrebari.length / perPagina);
+
+    progressBarFill.style.width = `${procent}%`;
+    progressPercent.textContent = `${procent}%`;
+    progressStep.textContent = `Pas ${paginaCurenta + 1} din ${totalPagini}`;
+
+    for (let i = start; i < end; i++) {
+      const intrebare = intrebari[i];
+      const block = document.createElement("div");
+      block.className = "question-block";
+
+      const p = document.createElement("p");
+      p.textContent = intrebare.text;
+      block.appendChild(p);
+
+      const scale = document.createElement("div");
+      scale.className = "likert-scale";
+
+      [0.2, 0.4, 0.6, 0.8, 1.0].forEach(val => {
+        const opt = document.createElement("div");
+        opt.className = "likert-option";
+        opt.dataset.index = i;
+        opt.dataset.val = val;
+
+        const circle = document.createElement("div");
+        circle.className = "circle";
+        opt.appendChild(circle);
+
+        if (raspunsuri[i] === val) {
+          opt.classList.add("selected");
+        }
+
+        opt.addEventListener("click", () => {
+          raspunsuri[i] = val;
+          afiseazaPagina();
+          setTimeout(() => {
+            const btn = document.querySelector(".btn-next");
+            if (btn) btn.scrollIntoView({ behavior: "smooth", block: "center" });
+          }, 200);
+        });
+
+        scale.appendChild(opt);
+      });
+
+      block.appendChild(scale);
+      groupDiv.appendChild(block);
+    }
+
+    const warning = document.createElement("p");
+    warning.id = "warning-message";
+    warning.style.color = "#b00020";
+    warning.style.fontSize = "0.9rem";
+    warning.style.textAlign = "center";
+    warning.style.marginTop = "20px";
+    warning.style.display = "none";
+    warning.textContent = "Te rugăm să răspunzi la toate afirmațiile înainte de a continua.";
+    groupDiv.appendChild(warning);
+
+    const btn = document.createElement("button");
+    btn.textContent = paginaCurenta === Math.floor(intrebari.length / perPagina) ? "Vezi rezultatele" : "Continuă";
+    btn.className = "btn-next";
+    btn.onclick = urmatoareaPagina;
+    groupDiv.appendChild(btn);
+  }
+
+  function urmatoareaPagina() {
+    const start = paginaCurenta * perPagina;
+    const end = Math.min(start + perPagina, intrebari.length);
+    let toateCompletate = true;
+
+    for (let i = start; i < end; i++) {
+      const bloc = groupDiv.querySelector(`.question-block:nth-child(${(i - start) + 1})`);
+      const raspuns = raspunsuri[i];
+
+      if (!raspuns) {
+        toateCompletate = false;
+        bloc.classList.add("error");
+      } else {
+        bloc.classList.remove("error");
+      }
+    }
+
+    const warning = document.getElementById("warning-message");
+    if (!toateCompletate) {
+      warning.style.display = "block";
+      return;
+    } else {
+      warning.style.display = "none";
+    }
+
+    paginaCurenta++;
+    if (paginaCurenta * perPagina >= intrebari.length) {
+      finalizeazaTestul();
+    } else {
+      afiseazaPagina();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }
+
+  function finalizeazaTestul() {
+  quizContainer.style.display = "none";
+  resultSection.style.display = "block";
+
+  scoruri.fill(0);
+  raspunsuri.forEach((val, i) => {
+    intrebari[i].domenii.forEach(d => {
+      scoruri[d.id] += d.puncte * val;
+    });
+  });
+
+  const rezultate = domenii.map((nume, idx) => ({
+    nume,
+    scor: scoruri[idx],
+    id: idx
+  })).sort((a, b) => b.scor - a.scor);
+
+  const scorMaxim = rezultate[0].scor;
+  const rezultateTop = rezultate.filter(r => r.scor >= scorMaxim - 2);
+
+  resultList.innerHTML = "";
+
+  rezultateTop.forEach((r, index) => {
+    const domeniuInfo = descrieriDomenii[r.nume];
+    const joburi = domeniiJoburi[r.nume] || [];
+
+    const card = document.createElement("div");
+    card.className = "result-card";
+
+    const joburiVizibile = joburi.slice(0, 5);
+    const joburiAscunse = joburi.slice(5);
+
+    card.innerHTML = `
+      <h3>🏆 Locul ${index + 1} – ${domeniuInfo.emoji} ${r.nume}</h3>
+      <p class="score">📈 Scor: ${r.scor.toFixed(1)} puncte</p>
+
+      <div class="domain-description">
+        <strong>📝 Descriere:</strong>
+        <p>${domeniuInfo.descriere}</p>
+      </div>
+
+      <div class="domain-skills">
+        <strong>🧠 Competențe utile:</strong>
+        <ul>
+          ${domeniuInfo.competente.map(c => `<li>${c}</li>`).join('')}
+        </ul>
+      </div>
+
+      <div class="domain-jobs">
+        <strong>🔹 Posibile cariere:</strong>
+        <ul class="joburi-list">
+          ${joburiVizibile.map(j => `<li>${j}</li>`).join('')}
+        </ul>
+
+        ${joburiAscunse.length > 0 ? `
+          <ul class="joburi-list hidden-joburi" style="display:none;">
+            ${joburiAscunse.map(j => `<li>${j}</li>`).join('')}
+          </ul>
+          <button class="toggle-joburi-btn">🔽 Vezi toate carierele</button>
+        ` : ""}
+      </div>
+    `;
+
+    // Activează butonul "Vezi toate carierele"
+    if (joburiAscunse.length > 0) {
+      const btn = card.querySelector(".toggle-joburi-btn");
+      const hiddenList = card.querySelector(".hidden-joburi");
+
+      btn.addEventListener("click", () => {
+        const isHidden = hiddenList.style.display === "none";
+        hiddenList.style.display = isHidden ? "block" : "none";
+        btn.textContent = isHidden ? "🔼 Ascunde carierele" : "🔽 Vezi toate carierele";
+      });
+    }
+
+    resultList.appendChild(card);
+  });
+}
+
+
 });
