@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tipuri de carduri bancare</title>
+  <link rel="stylesheet" href="../css/lectie4.css" />
+</head>
+<body>
+
+  <h1>Tipuri de carduri bancare</h1>
+
+  <div class="carousel-container">
+    <div class="carousel" id="carousel">
+
+      <div class="carousel__item item0">
+        <img src="images/carddedebit.webp" alt="Card Debit" />
+        <div class="desc">Card Debit<br>Permite plata directă din contul curent.</div>
+      </div>
+
+      <div class="carousel__item item1">
+        <img src="images/carddecredit.webp" alt="Card Credit" />
+        <div class="desc">Card Credit<br>Credit cu dobândă, plata ulterioară a cumpărăturilor.</div>
+      </div>
+
+      <div class="carousel__item item2">
+        <img src="images/cardprepay.webp" alt="Card Prepayat" />
+        <div class="desc">Card Prepay<br>Încărcat cu bani înainte de folosire.</div>
+      </div>
+
+    </div>
+
+    <button class="nav-btn prev" id="prevBtn">&#9664;</button>
+    <button class="nav-btn next" id="nextBtn">&#9654;</button>
+  </div>
+
+<div class="info-text">
+  <h2>Tipuri de carduri</h2>
+  <ul>
+    <li><strong>Card de debit:</strong> Folosit pentru cheltuieli zilnice, legat de contul tău bancar.</li>
+    <li><strong>Card de credit:</strong> Permite cumpărături pe datorie, cu rambursare ulterioară.</li>
+    <li><strong>Card preplătit:</strong> Se încarcă în avans cu o sumă fixă și nu este legat de contul tău.</li>
+  </ul>
+</div>
+  <div class="links">
+    <a href="lectie3.html" class="btn-link">⬅️ Lecția Anterioară</a>
+    <a href="lectie5.html" class="btn-link">Următoarea Lecție ➡️</a>
+  </div>
+
+  <script>
+    const carousel = document.getElementById('carousel');
+    let currentIndex = 0;
+
+    function rotateCarousel() {
+      const angle = currentIndex * -120;
+      carousel.style.transform = `translateZ(-450px) rotateY(${angle}deg)`;
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + 3) % 3;
+      rotateCarousel();
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % 3;
+      rotateCarousel();
+    });
+
+    rotateCarousel();
+  </script>
+  <script>
+    const idLectie = "4";
+    window.onload = () => {
+      let lectiiCitite = JSON.parse(localStorage.getItem('lectiiCitite')) || [];
+      if (!lectiiCitite.includes(idLectie)) {
+        lectiiCitite.push(idLectie);
+        localStorage.setItem('lectiiCitite', JSON.stringify(lectiiCitite));
+      }
+    };
+  </script>
+</body>
+</html>

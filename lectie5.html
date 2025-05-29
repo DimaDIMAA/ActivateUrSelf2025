@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lecția 5 - Primii pași în investiții</title>
+  <link rel="stylesheet" href="css/lectie5.css" />
+</head>
+<body>
+
+  <header>
+    <h1>Primii pași în investiții</h1>
+  </header>
+
+  <main>
+    <section class="question">
+      <h2>1. De ce este importantă diversificarea portofoliului de investiții?</h2>
+      <p>Diversificarea reduce riscul prin împărțirea banilor în mai multe tipuri de investiții, astfel încât pierderile dintr-un sector să fie compensate de câștigurile din altul.</p>
+    </section>
+
+    <section class="question">
+      <h2>2. Ce reprezintă diversificarea investițiilor?</h2>
+      <p>Este strategia de a investi în diferite clase de active (acțiuni, obligațiuni, imobiliare etc.) și piețe pentru a diminua riscurile și a crește stabilitatea portofoliului.</p>
+    </section>
+
+    <section class="question">
+      <h2>3. Ce este dobânda compusă?</h2>
+      <p>Dobânda compusă este dobânda calculată atât pe suma inițială investită, cât și pe dobânda acumulată anterior, ceea ce permite creșterea accelerată a investiției în timp.</p>
+    </section>
+
+    <section class="question">
+      <h2>4. Cum îți alegi investițiile în funcție de risc?</h2>
+      <p>Trebuie să evaluezi toleranța ta la risc și orizontul de timp; investitorii conservatori aleg active mai sigure, iar cei dispuși la risc mai mare pot opta pentru acțiuni sau criptomonede.</p>
+    </section>
+  </main>
+  <div class="links">
+  <a href="lectie4.html" class="btn-link">⬅️ Lecția Anterioară</a>
+  <a href="lectie6.html" class="btn-link">Următoarea Lecție ➡️</a>
+</div>
+
+  <script>
+    const idLectie = "5";
+    window.onload = () => {
+      let lectiiCitite = JSON.parse(localStorage.getItem('lectiiCitite')) || [];
+      if (!lectiiCitite.includes(idLectie)) {
+        lectiiCitite.push(idLectie);
+        localStorage.setItem('lectiiCitite', JSON.stringify(lectiiCitite));
+      }
+    };
+  </script>
+
+</body>
+</html>

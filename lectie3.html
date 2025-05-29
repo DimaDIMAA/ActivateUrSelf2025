@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <title>Economisirea banilor - Expert CSS</title>
+  <link rel="stylesheet" href="../css/lectie3.css" />
+</head>
+<body>
+
+  <div class="container">
+
+    <h1>Economisirea banilor</h1>
+
+    <div class="quiz-wrapper">
+
+      <section class="intrebare-card">
+        <h2>Ce metodă ajută eficient la economisire?</h2>
+        <ul class="raspunsuri">
+          <li>Așezarea tuturor economiilor la finalul lunii.</li>
+          <li>Cheltuirea salariului înainte și economisirea restului.</li>
+          <li>Economisirea doar la bonusuri sau prime.</li>
+          <li class="corect">Stabilirea unui procent fix din venit pentru economii imediat după primirea salariului.</li>
+        </ul>
+      </section>
+
+      <section class="intrebare-card">
+        <h2>Cum îți planifici economiile pentru viitor?</h2>
+        <ul class="raspunsuri">
+          <li>Prin economisirea întregii sume pe care o câștigi într-o lună.</li>
+          <li>Prin ignorarea cheltuielilor neprevăzute.</li>
+          <li class="corect">Prin economisirea unei sume fixe în fiecare lună și ajustarea periodică a bugetului.</li>
+          <li>Prin împrumutarea unor sume pentru a economisi.</li>
+        </ul>
+      </section>
+
+      <section class="intrebare-card">
+        <h2>Care este scopul principal al unui fond de urgență?</h2>
+        <ul class="raspunsuri">
+          <li>Să îți permită să îți îndeplinești toate dorințele imediat.</li>
+          <li class="corect">Să te protejeze în fața evenimentelor neprevăzute, cum ar fi o pierdere de job.</li>
+          <li>Să îți plătești vacanțele.</li>
+          <li>Să investești într-o casă de vacanță.</li>
+        </ul>
+      </section>
+
+    </div>
+
+    <div class="butoane-lectie">
+      <a href="lectie2.html" class="btn buton-intoarcere">⬅️ Lecția Anterioară</a>
+      <a href="lectie4.html" class="btn">➡️ Următoarea lecție</a>
+    </div>
+
+  </div>
+  <script>
+    const idLectie = "3";
+    window.onload = () => {
+      let lectiiCitite = JSON.parse(localStorage.getItem('lectiiCitite')) || [];
+      if (!lectiiCitite.includes(idLectie)) {
+        lectiiCitite.push(idLectie);
+        localStorage.setItem('lectiiCitite', JSON.stringify(lectiiCitite));
+      }
+    };
+  </script>
+
+</body>
+</html>

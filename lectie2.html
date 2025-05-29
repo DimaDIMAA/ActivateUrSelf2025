@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <title>Bugetul personal</title>
+  <link rel="stylesheet" href="../css/lectie2.css">
+</head>
+<body>
+
+  <h1>Bugetul personal</h1>  
+  <div class="intro-box">
+    <p>Crearea unui buget personal te ajută să înțelegi mai bine fluxul de venituri și cheltuieli, iar prin aceasta să ai un control mai mare asupra finanțelor tale.</p>
+  </div>
+  <div class="quiz-section">
+    <div class="question-card">
+      <h2>1. Cum îți construiești un buget lunar eficient?</h2>
+      <p class="answer">✅ Ținând cont de toate sursele de venit și de cheltuielile fixe și variabile.
+        Acest lucru îți oferă o imagine clară asupra banilor și te ajută să iei decizii financiare corecte.
+      </p>
+    </div>
+
+    <div class="question-card">
+      <h2>2. Ce reprezintă în mod corect bugetul personal?</h2>
+      <p class="answer">✅ O estimare a tuturor veniturilor și cheltuielilor planificate într-o perioadă.
+        Astfel îți poți organiza mai bine resursele și evita cheltuielile impulsive.
+      </p>
+    </div>
+
+    <div class="question-card">
+      <h2>3. Care este primul pas corect în construirea unui buget?</h2>
+      <p class="answer">✅ Aflarea sumei necesare pentru cheltuieli lunare și stabilirea priorităților.
+        Asta te ajută să îți acoperi nevoile esențiale și să economisești fără efort.
+      </p>
+    </div>
+
+    <div class="question-card">
+      <h2>4. Ce înseamnă să trăiești după buget?</h2>
+      <p class="answer">✅ Să ai un control constant asupra veniturilor și cheltuielilor tale.
+        Astfel eviți datoriile și poți construi treptat siguranța financiară.
+      </p>
+    </div>
+  </div>
+  <div class="media-placeholder">
+    <img src="images/lectie2.webp" alt="Ilustrație buget personal modernă">
+  </div>
+  <a href="lectie3.html" class="btn">➡️ Următoarea lecție</a>
+  <div class="back-button">
+        <a href="bani.html" class="buton-intoarcere">🏠 Înapoi la lista lecțiilor</a>
+      </div>
+  <script>
+    const idLectie = "2";
+    window.onload = () => {
+      let lectiiCitite = JSON.parse(localStorage.getItem('lectiiCitite')) || [];
+      if (!lectiiCitite.includes(idLectie)) {
+        lectiiCitite.push(idLectie);
+        localStorage.setItem('lectiiCitite', JSON.stringify(lectiiCitite));
+      }
+    };
+  </script>
+</body>
+</html>

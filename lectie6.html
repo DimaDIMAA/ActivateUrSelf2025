@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lectia 6 - Cum să eviți capcanele financiare</title>
+  <link rel="stylesheet" href="css/lectie6.css" />
+</head>
+<body>
+  <section class="capcane-section">
+    <h2>Cum eviți capcanele financiare?</h2>
+    <p>Capcanele financiare sunt situații care pot pune în pericol stabilitatea ta financiară. Pentru a le evita, trebuie să fii informat, să verifici toate detaliile și să iei decizii înțelepte.</p>
+
+    <div class="image-3d-container">
+      <img src="images/lectie6.jpg" alt="Capcane financiare" />
+    </div>
+
+    <h3>De ce este important să citești termenii și condițiile unui împrumut?</h3>
+    <p>Este esențial să înțelegi toate detaliile înainte să semnezi un contract, pentru a evita surprize precum dobânzi ascunse, penalități sau comisioane suplimentare.</p>
+
+    <h3>Cum funcționează un împrumut cu dobândă fixă?</h3>
+    <p>Un împrumut cu dobândă fixă înseamnă că rata dobânzii rămâne constantă pe toată durata contractului, ceea ce te ajută să planifici mai bine bugetul și să eviți fluctuațiile neprevăzute.</p>
+  </section>
+
+  <div class="links">
+    <a href="lectie5.html" class="btn-link">⬅️ Lecția Anterioară</a>
+    <a href="bani.html" class="btn buton-intoarcere">🏠 Înapoi la lista lecțiilor</a>
+  </div>
+  <script>
+    const idLectie = "6";
+    window.onload = () => {
+      let lectiiCitite = JSON.parse(localStorage.getItem('lectiiCitite')) || [];
+      if (!lectiiCitite.includes(idLectie)) {
+        lectiiCitite.push(idLectie);
+        localStorage.setItem('lectiiCitite', JSON.stringify(lectiiCitite));
+      }
+    };
+  </script>
+
+</body>
+</html>
