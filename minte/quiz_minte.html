@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test MISS</title>
+  <link rel="stylesheet" href="../css/quiz_minte.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Testul MISS</h1>
+      <p>Pas <span id="current-step">1</span> din 3</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2 id="quiz-instruction">Selectează opțiunea care te descrie cel mai bine</h2>
+
+    <!-- EXEMPLE SCALE -->
+    <div class="scale-legend">
+      <div class="scale-label" data-value="1">
+        <span>Foarte puțin</span>
+        <div class="scale-circle example-1">1</div>
+      </div>
+      <div class="scale-label" data-value="2">
+        <span>Puțin</span>
+        <div class="scale-circle example-2">2</div>
+      </div>
+      <div class="scale-label" data-value="3">
+        <span>Întrucâtva</span>
+        <div class="scale-circle example-3">3</div>
+      </div>
+      <div class="scale-label" data-value="4">
+        <span>Destul de mult</span>
+        <div class="scale-circle example-4">4</div>
+      </div>
+      <div class="scale-label" data-value="5">
+        <span>Mult</span>
+        <div class="scale-circle example-5">5</div>
+      </div>
+    </div>
+
+    <!-- ÎNTREBĂRI -->
+    <div id="question-list" class="question-list"></div>
+
+    <button id="next-button">Continuă</button>
+  </main>
+
+  <script src="../js/quiz_minte.js"></script>
+</body>
+</html>

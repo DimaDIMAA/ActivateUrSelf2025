@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lecția 3 – Cum te poți calma?</title>
+  <link rel="stylesheet" href="../css/minte.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body class="minte3-body">
+  <header class="minte3-main-header">
+    <div class="minte3-container">
+      <h1>Lecția 3 – Găsește-ți echilibrul</h1>
+      <p>Descoperă moduri în care să-ți gestionezi emoțiile</p>
+    </div>
+  </header>
+
+  <main class="minte3-container">
+    <section class="minte3-intro-box">
+      <h2>De ce este esențial să-ți controlezi emoțiile</h2>
+      <p>Atunci când ești stresat sau agitat, corpul și mintea ta au nevoie de o pauză pentru a-și regăsi echilibrul interior.</p>
+
+      <h3 class="minte3-subsection">Cum să-ți găsești echilibrul între viața personală și cea profesională</h3>
+      <div class="minte3-visual-box" style="text-align: center; margin: 2rem 0;">
+        <img src="../images/echilibru.webp" alt="Echilibru inimă-creier">
+      </div>
+      <div class="minte3-card-grid">
+        <div class="minte3-card">
+          <strong>Fii prezent în momentul actual:</strong>
+          <p>Evită multitaskingul și acordă atenție reală fiecărei activități.</p>
+        </div>
+        <div class="minte3-card">
+          <strong>Îngrijește-ți sănătatea fizică și mintală:</strong>
+          <p>Dormi suficient, fă sport și fă și ceea ce îți place.</p>
+        </div>
+        <div class="minte3-card">
+          <strong>Prioritizează-ți sarcinile:</strong>
+          <p>Alegerea corectă nu este întotdeauna și cea mai plăcută.</p>
+        </div>
+        <div class="minte3-card">
+          <strong>Fii flexibil și adaptabil:</strong>
+          <p>Acceptă schimbările și păstrează o perspectivă realistă.</p>
+        </div>
+        <div class="minte3-card">
+          <strong>Relaxează-te ca să îți menții productivitatea:</strong>
+          <p>Pauzele scurte și dese te ajută să eviți burnout-ul și să rămâi concentrat.</p>
+        </div>
+      </div>
+
+      <footer style="text-align: right; margin-top: 2rem;">
+        <a href="quiz_minte.html" class="minte3-button">🧪 Fă testul final</a>
+      </footer>
+    </section>
+  </main>
+  <script>
+    const container3 = document.querySelector('.minte3-container');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 60) {
+        container3.classList.add('shrink');
+        } else {
+        container3.classList.remove('shrink');
+        }
+    });
+  </script>
+</body>
+</html>
