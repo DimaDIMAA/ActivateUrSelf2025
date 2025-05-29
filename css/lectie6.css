@@ -1,0 +1,109 @@
+/* Reset și font */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #eee;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.capcane-section {
+  max-width: 800px;
+  background: linear-gradient(145deg, #1e2a38, #2e3c4f);
+  border-radius: 16px;
+  padding: 30px 40px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  border-left: 6px solid #00ffff;
+  margin-bottom: 60px;
+}
+
+.capcane-section h2, .capcane-section h3 {
+  color: #00ffff;
+  text-shadow: 0 0 5px #00ffff55;
+}
+
+.capcane-section p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.image-3d-container {
+  width: 350px;
+  height: 220px;
+  margin: 30px auto;
+  perspective: 1200px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 255, 255, 0.5);
+}
+
+.image-3d-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.image-3d-container:hover img {
+  transform: rotateY(15deg) rotateX(5deg) scale(1.05);
+  box-shadow: 0 15px 40px rgba(0, 255, 255, 0.7);
+}
+
+.links {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.btn-link, .buton-intoarcere {
+  position: relative;
+  display: inline-block;
+  padding: 14px 32px;
+  margin: 0 12px;
+  font-weight: 700;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  color: #004d4d;
+  background-color: #0ff;
+  border-radius: 25px;
+  text-decoration: none;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+  overflow: hidden;
+  user-select: none;
+  transition: background-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-link::before, .buton-intoarcere::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.3) 100%);
+  transform: translateY(-50%) skewX(-20deg);
+  transition: left 0.5s ease;
+  z-index: 1;
+}
+
+.btn-link:hover::before, .buton-intoarcere:hover::before {
+  left: 100%;
+}
+
+.btn-link:hover, .buton-intoarcere:hover {
+  background-color: #004d4d;
+  color: #0ff;
+  box-shadow: 0 0 35px rgba(0, 255, 255, 0.8);
+  transform: scale(1.05);
+  z-index: 10;
+}

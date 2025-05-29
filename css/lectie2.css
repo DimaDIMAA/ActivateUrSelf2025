@@ -1,0 +1,125 @@
+/* Font & culori rafinate */
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+    background-color: #f0f4f8;
+    color: #222;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+/* Titlul principal */
+h1 {
+    text-align: center;
+    color: #1d4e89;
+    font-size: 2.4rem;
+    margin-top: 20px;
+}
+
+/* Introducere stilizată */
+.intro-box {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #ffffff;
+    border-left: 6px solid #007BFF;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    font-size: 1.1rem;
+    color: #444;
+}
+
+/* Secțiunea de întrebări */
+.quiz-section {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+/* Card întrebări */
+.question-card {
+    background: #ffffff;
+    border-left: 6px solid #1d4e89;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+    transition: transform 0.2s ease;
+}
+.question-card:hover {
+    transform: scale(1.01);
+}
+
+/* Întrebare */
+.question-card h2 {
+    font-size: 1.3rem;
+    color: #16324f;
+    margin-bottom: 12px;
+}
+
+/* Răspuns */
+.answer {
+    font-weight: 600;
+    color: #256029;
+}
+
+/* Placeholder imagine */
+.media-placeholder {
+    display: flex;
+    justify-content: center;
+    margin: 50px auto;
+    max-width: 700px;
+}
+.media-placeholder img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+/* Buton continuare */
+.btn {
+    display: block;
+    margin: 30px auto;
+    background-color: #4CAF50; /* verde ca butonul de întoarcere */
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    text-align: center;
+    width: fit-content;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #45a049;
+    transform: translateY(-5px);
+}
+
+.btn:active {
+    transform: translateY(2px);
+}
+
+.buton-intoarcere {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.buton-intoarcere:hover {
+    background-color: #45a049;
+    transform: translateY(-5px);
+}
+
+.buton-intoarcere:active {
+    transform: translateY(2px);
+}
+.back-button {
+    text-align: center;
+    margin-top: 30px;
+}
