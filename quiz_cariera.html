@@ -1,89 +1,617 @@
-<!DOCTYPE html>
-<html lang="ro">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Life-Skills – Test de Personalitate</title>
-  <link rel="stylesheet" href="css/quiz_cariera.css" />
-</head>
-<body>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f6f7fb;
+  color: #222;
+}
 
-  <!-- Ecran introductiv -->
-<div id="intro-screen" class="intro-screen">
-  <img src="images/cariera.svg" alt="Intro" class="intro-image">
-  <h1>Descoperă ce carieră ți se potrivește</h1>
-  <ul class="intro-list">
-    <li>Răspunde sincer la fiecare întrebare</li>
-    <li>Nu poți sări peste întrebări, dar te poți întoarce la ele mai târziu</li>
-  </ul>
-  <button id="start-button">Începe testul</button>
-</div>
+/* HEADER */
+.top-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  z-index: 1000;
+}
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+}
+.header-logo {
+  height: 38px;
+}
+.header-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1d3557;
+  margin-left: 12px;
+}
+
+/* LAYOUT */
+.split-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main-content {
+  width: 100%;
+  max-width: 760px;
+  padding: 40px 24px;
+  margin: 0 auto; /* ADĂUGAT pentru centrare */
+}
+
+.quiz-container {
+  background: transparent;
+  width: 100%;
+  max-width: 760px; /* Adăugat pentru lățime consistentă */
+  margin: 0 auto;    /* ADĂUGAT pentru centrare */
+}
 
 
-  <div class="split-layout" id="main-quiz" style="display: none;">
-    <header class="top-header">
-      <div class="header-inner">
-        <img src="images/logo2.png" alt="Life-Skills Logo" class="header-logo">
-        <span class="header-title">Life-Skills</span>
-      </div>
-    </header>
+/* PROGRES */
+.progress-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  color: #333;
+}
+#progress-bar {
+  flex: 1;
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+#progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background-color: #007a3d;
+  transition: width 0.3s ease;
+}
 
-    <main class="main-content">
-      <div class="quiz-container">
-        
-        <!-- Progres -->
-        <div class="progress-info">
-          <span id="progress-percent">0%</span>
-          <div id="progress-bar"><div id="progress-bar-fill"></div></div>
-          <span id="progress-step">Pas 1 din 25</span>
-        </div>
+/* LEGENDA */
+.likert-legend {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.legend-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #444;
+}
+.legend-option .circle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  margin-bottom: 6px;
+  border: 2px solid transparent;
+}
 
-        <!-- Legendă -->
-         <div class="quiz-title-row">
-  <div class="back-arrow" id="back-arrow" style="display: none;">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-      stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-      <polyline points="15 18 9 12 15 6"></polyline>
-    </svg>
-  </div>
-  <h1 class="quiz-title">Alege cât de precis te reprezintă afirmațiile de mai jos:</h1>
-</div>
-        
-        <div class="likert-legend aligned">
-          <div class="legend-option" data-val="0.2">
-            <div class="circle"></div>
-            <span>Dezacord total</span>
-          </div>
-          <div class="legend-option" data-val="0.4">
-            <div class="circle"></div>
-            <span>Dezacord</span>
-          </div>
-          <div class="legend-option" data-val="0.6">
-            <div class="circle"></div>
-            <span>Neutru</span>
-          </div>
-          <div class="legend-option" data-val="0.8">
-            <div class="circle"></div>
-            <span>Acord</span>
-          </div>
-          <div class="legend-option" data-val="1.0">
-            <div class="circle"></div>
-            <span>Acord total</span>
-          </div>
-        </div>
-        <div id="question-group"></div>
-      </div>
+/* TITLU */
+.quiz-title {
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 24px;
+}
+.quiz-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
 
-      <section id="result-section" style="display: none;">
-        <h2><h2>Descoperă direcțiile care ți se potrivesc cel mai bine 🔍</h2></h2>
-        <div id="result-list"></div>
-        <button id="retry-btn">Refă testul</button>
-        <button id="btn-acasa">Acasă 🏠</button>
-      </section>
-    </main>
-  </div>
+/* ÎNTREBĂRI */
+.question-block {
+  background-color: #ffffff;
+  padding: 18px 20px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.question-block p {
+  font-weight: 500;
+  margin-bottom: 14px;
+  text-align: center;
+}
+.likert-scale {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+}
+.likert-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.75rem;
+  color: #333;
+  gap: 6px;
+}
 
-  <script src="js/domeniiDetaliate.js"></script>
-  <script src="js/quiz_cariera.js"></script>
-</body>
-</html>
+/* BULINE – neselectate */
+.likert-option[data-val="0.2"] .circle {
+  background-color: #ffe6e6;
+  border-color: #ffb3b3;
+}
+.likert-option[data-val="0.4"] .circle {
+  background-color: #ffeacc;
+  border-color: #ffd699;
+}
+.likert-option[data-val="0.6"] .circle {
+  background-color: #f0f0f0;
+  border-color: #cccccc;
+}
+.likert-option[data-val="0.8"] .circle {
+  background-color: #dbf5e9;
+  border-color: #a8e6cf;
+}
+.likert-option[data-val="1"] .circle,
+.likert-option[data-val="1.0"] .circle {
+  background-color: #ccf5e1;
+  border-color: #8ee4c1;
+}
+
+/* BULINE – selectate */
+.likert-option.selected[data-val="0.2"] .circle {
+  background-color: #ff6961;
+  border-color: #ff6961;
+  box-shadow: 0 0 0 2px rgba(255, 105, 97, 0.3);
+}
+.likert-option.selected[data-val="0.4"] .circle {
+  background-color: #ffb347;
+  border-color: #ffb347;
+  box-shadow: 0 0 0 2px rgba(255, 179, 71, 0.3);
+}
+.likert-option.selected[data-val="0.6"] .circle {
+  background-color: #c0c0c0;
+  border-color: #c0c0c0;
+  box-shadow: 0 0 0 2px rgba(192, 192, 192, 0.3);
+}
+.likert-option.selected[data-val="0.8"] .circle {
+  background-color: #50e3c2;
+  border-color: #50e3c2;
+  box-shadow: 0 0 0 2px rgba(80, 227, 194, 0.3);
+}
+.likert-option.selected[data-val="1"] .circle,
+.likert-option.selected[data-val="1.0"] .circle {
+  background-color: #1fd38a;
+  border-color: #1fd38a;
+  box-shadow: 0 0 0 2px rgba(31, 211, 138, 0.3);
+}
+
+/* BIFA */
+.circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid #ccc;
+  display: inline-block;
+  position: relative;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 0 2px transparent;
+}
+.circle::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 5px;
+  border: solid black;
+  border-width: 0 0 2.5px 2.5px;
+  transform: rotate(-45deg);
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  opacity: 0;
+}
+.likert-option.selected .circle::after {
+  opacity: 1;
+}
+
+/* BUTON CONTINUARE */
+.btn-next {
+  display: block;
+  margin: 40px auto 0 auto;
+  width: 100%; /* lățime completă */
+  max-width: 540px; /* limitare ca în model */
+  height: 56px;
+  background-color: #007a3d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.btn-next:hover {
+  background-color: #006633;
+  transform: scale(1.02);
+}
+.quiz-warning {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 24px;
+  margin-bottom: -20px;
+}
+
+/* SECTIUNE REZULTATE */
+#result-section {
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+#result-list p {
+  margin: 8px 0;
+  font-weight: 500;
+}
+#retry-btn {
+  margin-top: 20px;
+  background-color: #007a3d;
+  color: white;
+  padding: 10px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#retry-btn:hover {
+  background-color: #006633;
+}
+.likert-legend.minimalist {
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+.likert-legend.minimalist .circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+.question-block.error {
+  border: 2px solid #cc0000;
+}
+.likert-legend.aligned {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  margin: 24px 0 28px 0;
+  padding: 0 10px;
+}
+
+.likert-legend.aligned .legend-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #333;
+  gap: 6px;
+}
+
+.likert-legend.aligned .legend-option .circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  background-color: #f0f0f0;
+}
+
+.likert-legend.aligned .legend-option[data-val="0.2"] .circle {
+  background-color: #ffe6e6;
+  border: 2px solid #ff6666;
+}
+.likert-legend.aligned .legend-option[data-val="0.4"] .circle {
+  background-color: #ffeacc;
+  border: 2px solid #ff9900;
+}
+.likert-legend.aligned .legend-option[data-val="0.6"] .circle {
+  background-color: #f0f0f0;
+  border: 2px solid #999999;
+}
+.likert-legend.aligned .legend-option[data-val="0.8"] .circle {
+  background-color: #dbf5e9;
+  border: 2px solid #43d9ac;
+}
+.likert-legend.aligned .legend-option[data-val="1.0"] .circle {
+  background-color: #ccf5e1;
+  border: 2px solid #1fd38a;
+}
+
+/* Efect la hover pentru bulinele din quiz (ca în exemplu) */
+.likert-option[data-val="0.2"]:hover .circle {
+  border: 2px solid #ff6666;
+}
+.likert-option[data-val="0.4"]:hover .circle {
+  border: 2px solid #ff9900;
+}
+.likert-option[data-val="0.6"]:hover .circle {
+  border: 2px solid #999999;
+}
+.likert-option[data-val="0.8"]:hover .circle {
+  border: 2px solid #43d9ac;
+}
+.likert-option[data-val="1"]:hover .circle,
+.likert-option[data-val="1.0"]:hover .circle {
+  border: 2px solid #1fd38a;
+}
+/* Efect de hover pentru bulinele din exemplu (aligned legend) */
+.likert-legend.aligned .legend-option[data-val="0.2"] .circle:hover {
+  border: 2px solid #ff6666;
+}
+.likert-legend.aligned .legend-option[data-val="0.4"] .circle:hover {
+  border: 2px solid #ff9900;
+}
+.likert-legend.aligned .legend-option[data-val="0.6"] .circle:hover {
+  border: 2px solid #999999;
+}
+.likert-legend.aligned .legend-option[data-val="0.8"] .circle:hover {
+  border: 2px solid #43d9ac;
+}
+.likert-legend.aligned .legend-option[data-val="1.0"] .circle:hover {
+  border: 2px solid #1fd38a;
+}
+.back-arrow {
+  cursor: pointer;
+  padding: 6px 10px;
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.2s ease;
+  z-index: 10;
+  margin-right: 12px;
+}
+
+.back-arrow svg {
+  width: 20px;
+  height: 20px;
+  stroke: #333;
+  transition: stroke 0.3s ease, transform 0.2s ease;
+}
+
+.back-arrow:hover svg {
+  stroke: #007a3d;
+  transform: translateX(-3px);
+}
+
+
+#intro-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff; /* fundal alb doar la început */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 9999;
+  padding: 40px 20px;
+}
+
+.intro-content {
+  background-color: #fff;
+  padding: 48px 32px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  max-width: 560px;
+  width: 100%;
+}
+
+.intro-image {
+  width: 160px;
+  height: auto;
+  margin: 0 auto 32px auto;
+  display: block;
+}
+
+.intro-content h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1d3557;
+  margin-bottom: 24px;
+}
+
+.intro-content ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 36px;
+  font-size: 1.15rem;
+  color: #333;
+}
+
+.intro-content ul li {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.intro-content ul li::before {
+  content: "✔";
+  color: #007a3d;
+  font-weight: bold;
+}
+
+#start-btn {
+  background-color: #007a3d;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 28px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+#start-btn:hover {
+  background-color: #006333;
+}
+/* INTRO SCREEN */
+.intro-screen {
+  background-color: #ffffff;
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.intro-image {
+  width: 260px;
+  max-width: 80%;
+  margin-bottom: 24px;
+}
+
+.intro-screen h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 14px;
+  color: #1d3557;
+}
+
+.intro-screen p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 30px;
+  max-width: 480px;
+}
+
+#start-button {
+  padding: 14px 32px;
+  font-size: 1.05rem;
+  background-color: #007a3d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+#start-button:hover {
+  background-color: #006633;
+}
+
+/* Listă sfaturi */
+.intro-screen ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+  font-size: 1.1rem;
+  color: #333;
+  max-width: 480px;
+}
+
+.intro-screen ul li {
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.intro-screen ul li::before {
+  content: "✔";
+  color: #007a3d;
+  font-weight: bold;
+}
+
+/* Buton full-width ca propozitiile */
+#start-button {
+  padding: 14px 28px;
+  font-size: 1.05rem;
+  background-color: #007a3d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 480px;
+}
+
+/* Casete rezultate stilizate */
+.result-card {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+.result-card h3 {
+  margin-top: 0;
+  color: #007a3d;
+  font-size: 1.1rem;
+}
+.result-card ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 10px;
+}
+.result-card ul li {
+  margin: 4px 0;
+}
+.toggle-joburi-btn {
+  background: none;
+  color: #007a3d;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-top: 6px;
+  text-decoration: underline;
+}
+
+.toggle-joburi-btn:hover {
+  color: #005f2d;
+}
+
+.hidden-joburi {
+  margin-top: 8px;
+  padding-left: 20px;
+}
+
+
+#btn-acasa {
+  background-color: #1d3557;
+  color: white;
+  padding: 10px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 12px;
+}
+#btn-acasa:hover {
+  background-color: #16314c;
+}
