@@ -157,7 +157,7 @@ const intrebari = [
 },
 {text: "Te pasionează să înțelegi gândurile și emoțiile oamenilor pentru a-i ajuta să-și depășească dificultățile?",domenii: [{id: 2, puncte: 1}] },
 
-]
+];
 
 
 const domeniiJoburi = {
@@ -440,9 +440,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const scoruri = Array(28).fill(0);
 
   const groupDiv = document.getElementById("question-group");
-  const progressBarFill = document.getElementById("progress-bar-fill");
-  const progressPercent = document.getElementById("progress-percent");
-  const progressStep = document.getElementById("progress-step");
   const resultSection = document.getElementById("result-section");
   const resultList = document.getElementById("result-list");
   const retryBtn = document.getElementById("retry-btn");
@@ -481,20 +478,20 @@ document.addEventListener("DOMContentLoaded", () => {
   function afiseazaPagina() {
     groupDiv.innerHTML = "";
 
-    if (paginaCurenta > 0) {
-      backArrow.style.display = "inline-block";
-    } else {
-      backArrow.style.display = "none";
-    }
+    backArrow.style.display = paginaCurenta > 0 ? "inline-block" : "none";
 
     const start = paginaCurenta * perPagina;
     const end = Math.min(start + perPagina, intrebari.length);
     const procent = Math.round((start / intrebari.length) * 100);
     const totalPagini = Math.ceil(intrebari.length / perPagina);
 
-    progressBarFill.style.width = `${procent}%`;
-    progressPercent.textContent = `${procent}%`;
-    progressStep.textContent = `Pas ${paginaCurenta + 1} din ${totalPagini}`;
+    const progressBarFill = document.getElementById("progress-bar-fill");
+    const progressPercent = document.getElementById("progress-percent");
+    const progressStep = document.getElementById("progress-step");
+
+    if (progressBarFill) progressBarFill.style.width = `${procent}%`;
+    if (progressPercent) progressPercent.textContent = `${procent}%`;
+    if (progressStep) progressStep.textContent = `Pas ${paginaCurenta + 1} din ${totalPagini}`;
 
     for (let i = start; i < end; i++) {
       const intrebare = intrebari[i];
@@ -590,83 +587,87 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function finalizeazaTestul() {
-  quizContainer.style.display = "none";
-  resultSection.style.display = "block";
+    quizContainer.style.display = "none";
+    resultSection.style.display = "block";
 
-  scoruri.fill(0);
-  raspunsuri.forEach((val, i) => {
-    intrebari[i].domenii.forEach(d => {
-      scoruri[d.id] += d.puncte * val;
-    });
-  });
-
-  const rezultate = domenii.map((nume, idx) => ({
-    nume,
-    scor: scoruri[idx],
-    id: idx
-  })).sort((a, b) => b.scor - a.scor);
-
-  const scorMaxim = rezultate[0].scor;
-  const rezultateTop = rezultate.filter(r => r.scor >= scorMaxim - 2);
-
-  resultList.innerHTML = "";
-
-  rezultateTop.forEach((r, index) => {
-    const domeniuInfo = descrieriDomenii[r.nume];
-    const joburi = domeniiJoburi[r.nume] || [];
-
-    const card = document.createElement("div");
-    card.className = "result-card";
-
-    const joburiVizibile = joburi.slice(0, 5);
-    const joburiAscunse = joburi.slice(5);
-
-    card.innerHTML = `
-      <h3>🏆 Locul ${index + 1} – ${domeniuInfo.emoji} ${r.nume}</h3>
-      <p class="score">📈 Scor: ${r.scor.toFixed(1)} puncte</p>
-
-      <div class="domain-description">
-        <strong>📝 Descriere:</strong>
-        <p>${domeniuInfo.descriere}</p>
-      </div>
-
-      <div class="domain-skills">
-        <strong>🧠 Competențe utile:</strong>
-        <ul>
-          ${domeniuInfo.competente.map(c => `<li>${c}</li>`).join('')}
-        </ul>
-      </div>
-
-      <div class="domain-jobs">
-        <strong>🔹 Posibile cariere:</strong>
-        <ul class="joburi-list">
-          ${joburiVizibile.map(j => `<li>${j}</li>`).join('')}
-        </ul>
-
-        ${joburiAscunse.length > 0 ? `
-          <ul class="joburi-list hidden-joburi" style="display:none;">
-            ${joburiAscunse.map(j => `<li>${j}</li>`).join('')}
-          </ul>
-          <button class="toggle-joburi-btn">🔽 Vezi toate carierele</button>
-        ` : ""}
-      </div>
-    `;
-
-    // Activează butonul "Vezi toate carierele"
-    if (joburiAscunse.length > 0) {
-      const btn = card.querySelector(".toggle-joburi-btn");
-      const hiddenList = card.querySelector(".hidden-joburi");
-
-      btn.addEventListener("click", () => {
-        const isHidden = hiddenList.style.display === "none";
-        hiddenList.style.display = isHidden ? "block" : "none";
-        btn.textContent = isHidden ? "🔼 Ascunde carierele" : "🔽 Vezi toate carierele";
+    scoruri.fill(0);
+    raspunsuri.forEach((val, i) => {
+      intrebari[i].domenii.forEach(d => {
+        scoruri[d.id] += d.puncte * val;
       });
-    }
+    });
 
-    resultList.appendChild(card);
+    const rezultate = domenii.map((nume, idx) => ({
+      nume,
+      scor: scoruri[idx],
+      id: idx
+    })).sort((a, b) => b.scor - a.scor);
+
+    const scorMaxim = rezultate[0].scor;
+    const rezultateTop = rezultate.filter(r => r.scor >= scorMaxim - 2);
+
+    resultList.innerHTML = "";
+
+    rezultateTop.forEach((r, index) => {
+      const domeniuInfo = descrieriDomenii[r.nume];
+      const joburi = domeniiJoburi[r.nume] || [];
+
+      const card = document.createElement("div");
+      card.className = "result-card";
+
+      const joburiVizibile = joburi.slice(0, 5);
+      const joburiAscunse = joburi.slice(5);
+
+      card.innerHTML = `
+        <h3>🏆 Locul ${index + 1} – ${domeniuInfo.emoji} ${r.nume}</h3>
+        <p class="score">📈 Scor: ${r.scor.toFixed(1)} puncte</p>
+
+        <div class="domain-description">
+          <strong>📝 Descriere:</strong>
+          <p>${domeniuInfo.descriere}</p>
+        </div>
+
+        <div class="domain-skills">
+          <strong>🧠 Competențe utile:</strong>
+          <ul>
+            ${domeniuInfo.competente.map(c => `<li>${c}</li>`).join('')}
+          </ul>
+        </div>
+
+        <div class="domain-jobs">
+          <strong>🔹 Posibile cariere:</strong>
+          <ul class="joburi-list">
+            ${joburiVizibile.map(j => `<li>${j}</li>`).join('')}
+          </ul>
+
+          ${joburiAscunse.length > 0 ? `
+            <ul class="joburi-list hidden-joburi" style="display:none;">
+              ${joburiAscunse.map(j => `<li>${j}</li>`).join('')}
+            </ul>
+            <button class="toggle-joburi-btn">🔽 Vezi toate carierele</button>
+          ` : ""}
+        </div>
+      `;
+
+      if (joburiAscunse.length > 0) {
+        const btn = card.querySelector(".toggle-joburi-btn");
+        const hiddenList = card.querySelector(".hidden-joburi");
+
+        btn.addEventListener("click", () => {
+          const isHidden = hiddenList.style.display === "none";
+          hiddenList.style.display = isHidden ? "block" : "none";
+          btn.textContent = isHidden ? "🔼 Ascunde carierele" : "🔽 Vezi toate carierele";
+        });
+      }
+
+      resultList.appendChild(card);
+    });
+  }
+  const btnAcasa = document.getElementById("btn-acasa");
+if (btnAcasa) {
+  btnAcasa.addEventListener("click", () => {
+    window.location.href = "index.html#capitole";
   });
 }
-
 
 });
